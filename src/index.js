@@ -4,7 +4,7 @@ const morgan = require('morgan')
 const { engine } = require('express-handlebars')
 // const { render } = require('express/lib/response')
 const app = express()
-const port = 3000
+const port = process.env.PORT
 
 app.use(express.static(path.join(__dirname,'public')))
 
