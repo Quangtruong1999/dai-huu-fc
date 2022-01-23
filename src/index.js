@@ -20,11 +20,13 @@ app.set('views', path.join(__dirname,'resources/views'));
 
 // app.get('/', (req, res) => {
 //   res.render('home')})
-app.get('/', (req, res) => {res.render('home')})
-  
-// app.get('/news', (req, res) => {
-//   res.render('news')})
-  
+app.get('/', (req, res) => {
+  res.render('home')
+})
+
+app.get('/404', (req, res) => {
+  res.render('404')
+})
 
 app.listen(port || 5000, () => {
   console.log('Server running...')
