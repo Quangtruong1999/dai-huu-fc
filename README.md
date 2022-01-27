@@ -17,7 +17,7 @@ git checkout {branch_name}
 
 Step 5: Wwrite something in the newly-downloaded file
 
-Step 6: Push an existing Git repository with the following command:
+Step 6: Push an existing Git repository with the following command: \n
 git add .
 git commit -m "write something"
 git push
