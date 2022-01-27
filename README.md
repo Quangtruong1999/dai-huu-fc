@@ -23,4 +23,8 @@ Step 6: Push an existing Git repository with the following command:
   git commit -m "write something"  
   git push
 
+Step 7: Merge an existing Git repository with the following command:  
+  git fetch --all  
+  git merge origin/stagging  
+  
 ------------------------------------------------------------Good luck------------------------------------------------------------
