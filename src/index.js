@@ -35,7 +35,7 @@ var config = {
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
 };
-var pool = new pg.Pool(config)
+// var pool = new pg.Pool(config)
 
 route(app);
 //router
