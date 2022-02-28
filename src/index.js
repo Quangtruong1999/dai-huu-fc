@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const { engine } = require('express-handlebars');
 const pg = require('pg');
 const route = require('./routes');
@@ -15,7 +15,7 @@ app.listen(port || 5001, () => {
 })
 
 //HTTP logger
-app.use(morgan('combined'))
+// app.use(morgan('combined'))
 
 //Templates engine
 app.engine('handlebars', engine());
