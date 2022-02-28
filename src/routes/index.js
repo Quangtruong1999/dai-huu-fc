@@ -2,24 +2,24 @@ const team_router = require('./teams')
 const match_router = require('./matches')
 
 function route(app){
-    // app.get('/db', (req, res) => {
-    //     pool.connect(function(err, client, done){
-    //         if(err){
-    //             return console.error('error fetching client from pool ', err)
-    //         }
+    app.get('/db', (req, res) => {
+        pool.connect(function(err, client, done){
+            if(err){
+                return console.error('error fetching client from pool ', err)
+            }
       
-    //         client.query('SELECT * FROM position', (err, result) => {
-    //             done();
+            client.query('SELECT * FROM position', (err, result) => {
+                done();
             
-    //             if(err){
-    //             res.end();
-    //             return console.error('error running query ', err)
-    //             }
-    //             console.log('Data = ', result.rows)
-    //             res.render('db', {data: result.rows})
-    //         });
-    //     });
-    // })
+                if(err){
+                res.end();
+                return console.error('error running query ', err)
+                }
+                console.log('Data = ', result.rows)
+                res.render('db', {data: result.rows})
+            });
+        });
+    })
       
     app.get('/', (req, res) => {
         res.render('home')
