@@ -1,5 +1,20 @@
 const team_router = require('./teams')
 const match_router = require('./matches')
+const pg = require('pg')
+
+//Connect db
+var config = {
+    host: 'localhost',
+    user: 'postgres',
+    database: 'dai-huu-fc',
+    password: '3.141592653589',
+    port: 5432,
+    max: 20,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 2000,
+  };
+var pool = new pg.Pool(config)
+  
 
 function route(app){
     app.get('/db', (req, res) => {
