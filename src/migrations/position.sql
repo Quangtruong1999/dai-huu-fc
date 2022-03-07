@@ -1,0 +1,6 @@
+--Create a position
+CREATE TABLE position
+(ID NUMERIC,
+NAME VARCHAR(255),
+CONSTRAINT A_POS_FK PRIMARY KEY (ID)
+);
