@@ -14,7 +14,7 @@ const pg = require('pg')
 //     connectionTimeoutMillis: 2000,
 //   };
 
-var config = {
+var connectionString = {
     host: 'ec2-35-153-35-94.compute-1.amazonaws.com',
     user: 'yqxrlacxxfwvzg',
     database: 'd89o6usfr7j3l0',
@@ -24,27 +24,33 @@ var config = {
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 2000,
   };
-var pool = new pg.Pool(config)
+connectionString = {
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
+    };
+// var pool = new pg.Pool(config)
+const pool = new pg.Pool(connectionString);
   
 
 function route(app){
     app.get('/db', (req, res) => {
-        pool.connect(function(err, client, done){
-            if(err){
-                return console.error('error fetching client from pool ', err)
-            }
+        pool.on('connect', () => console.log('connected to db'));
+        // pool.connect(function(err, client, done){
+        //     if(err){
+        //         return console.error('error fetching client from pool ', err)
+        //     }
       
-            client.query('SELECT * FROM position', (err, result) => {
-                done();
+        //     client.query('SELECT * FROM position', (err, result) => {
+        //         done();
             
-                if(err){
-                    res.end();
-                    return console.error('error running query ', err)
-                }
-                console.log('Data = ', result.rows)
-                res.render('db', {data: result.rows})
-            });
-        });
+        //         if(err){
+        //             res.end();
+        //             return console.error('error running query ', err)
+        //         }
+        //         console.log('Data = ', result.rows)
+        //         res.render('db', {data: result.rows})
+        //     });
+        // });
     })
       
     app.get('/', (req, res) => {
