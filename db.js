@@ -31,30 +31,32 @@ env.config({
 //     database: 'dai-huu-fc',
 // })
 
-// client.connect();
-// client.query('select * from position', (err, res) => {
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
+})
+
+pool.connect();
+// pool.query('select * from position', (err, res) => {
 //     if(!err){
 //         console.log('rows = ', res.rows);
 //     }else{
 //         console.log('error : ', err.message);
 //     }
 // })
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true
-})
 
-try{
-    const client = await pool.connect();
-    const result = await client.query('select * from position')
-    const results = {
-        'results': (result) ? result.rows : null
-    }
+// try{
+//     const client = await pool.connect();
+//     const result = await client.query('select * from position')
+//     const results = {
+//         'results': (result) ? result.rows : null
+//     }
 
-    client.release();
-}
-catch (err){
-    console.error(err);
-    res.send('Error' + err)
-}
+//     client.release();
+// }
+// catch (err){
+//     console.error(err);
+//     res.send('Error' + err)
+// }
 

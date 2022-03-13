@@ -4,10 +4,15 @@ const express = require('express');
 const { engine } = require('express-handlebars');
 const {Pool} = require('pg')
 const route = require('./routes');
+const env = require('dotenv')
 // const { render } = require('express/lib/response')
 const app = express()
 const port = process.env.PORT
 
+
+env.config({
+  path:__dirname + '/.env',
+})
 app.use(express.static(path.join(__dirname,'public')))
 
 app.listen(port || 5001, () => {
