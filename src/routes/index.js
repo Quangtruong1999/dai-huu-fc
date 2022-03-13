@@ -1,7 +1,9 @@
 const team_router = require('./teams')
 const match_router = require('./matches')
-const pg = require('pg')
+const {Pool} = require('pg')
 const {migrate} = require('postgres-migrations')
+// const { Client } = require('pg/lib')
+
 //Connect db
 // var config = {
 //     host: 'localhost',
@@ -13,7 +15,24 @@ const {migrate} = require('postgres-migrations')
 //     idleTimeoutMillis: 30000,
 //     connectionTimeoutMillis: 2000,
 //   };
-
+// var dbConfig = {
+//     host: 'ec2-35-153-35-94.compute-1.amazonaws.com',
+//     user: 'yqxrlacxxfwvzg',
+//     database: 'd89o6usfr7j3l0',
+//     password: 'b264645415e9e9a17a0ec303d70e4fb084f9e6af8c1af1a3cb1d8ca4b28c57e1',
+//     port: 5432,
+//     max: 20,
+//     idleTimeoutMillis: 30000,
+//     connectionTimeoutMillis: 2000,
+//   };
+// const client = new pg.Client(dbConfig); // or a Pool, or a PoolClient
+// client.connect();
+// try {
+//     console.log('Connect Success')
+//     // await migrate({client}, "src/migration/")
+// } finally {
+//     await client.end()
+// }
 // connectionString = {
 //     connectionString: process.env.DATABASE_URL,
 //     connectionString: 'postgres://yqxrlacxxfwvzg:b264645415e9e9a17a0ec303d70e4fb084f9e6af8c1af1a3cb1d8ca4b28c57e1@ec2-35-153-35-94.compute-1.amazonaws.com:5432/d89o6usfr7j3l0',
@@ -22,48 +41,48 @@ const {migrate} = require('postgres-migrations')
 // var pool = new pg.Pool(config)
 // const pool = new pg.Pool(connectionString);
 
+// const client = new Client({
+//     host: 'ec2-35-153-35-94.compute-1.amazonaws.com',
+//     user: 'yqxrlacxxfwvzg',
+//     port: 5432,
+//     password: 'b264645415e9e9a17a0ec303d70e4fb084f9e6af8c1af1a3cb1d8ca4b28c57e1',
+//     database: 'd89o6usfr7j3l0',
+// });
+
 async function route(app){
 
-    var dbConfig = {
-        host: 'ec2-35-153-35-94.compute-1.amazonaws.com',
-        user: 'yqxrlacxxfwvzg',
-        database: 'd89o6usfr7j3l0',
-        password: 'b264645415e9e9a17a0ec303d70e4fb084f9e6af8c1af1a3cb1d8ca4b28c57e1',
-        port: 5432,
-        max: 20,
-        idleTimeoutMillis: 30000,
-        connectionTimeoutMillis: 2000,
-      };
-    const client = new pg.Client(dbConfig); // or a Pool, or a PoolClient
-    client.connect();
-    try {
-        console.log('Connect Success')
-        // await migrate({client}, "src/migration/")
-    } finally {
-        await client.end()
-    }
 
     app.get('/db', (req, res) => {
-        // pool.on('connect', () => console.log('connected to db'));
-        client.connect(function(err, client, done){
-            
-        });
-        pool.connect(function(err, client, done){
-            if(err){
-                return console.error('error fetching client from pool ', err)
+        try{
+            const client = pool.connect();
+            const result = client.query('SELECT * FROM position')
+            const results = {
+                'results': (result) ? result.rows : null
             }
+        
+            client.release();
+        }
+        catch (err){
+            console.error(err);
+            res.send('Error' + err)
+        }
+        
+        // pool.connect(function(err, client, done){
+        //     if(err){
+        //         return console.error('error fetching client from pool ', err)
+        //     }
       
-            client.query('SELECT * FROM position', (err, result) => {
-                done();
+        //     client.query('SELECT * FROM position', (err, result) => {
+        //         done();
             
-                if(err){
-                    res.end();
-                    return console.error('error running query ', err)
-                }
-                console.log('Data = ', result.rows)
-                res.render('db', {data: result.rows})
-            });
-        });
+        //         if(err){
+        //             res.end();
+        //             return console.error('error running query ', err)
+        //         }
+        //         console.log('Data = ', result.rows)
+        //         res.render('db', {data: result.rows})
+        //     });
+        // });
     })
       
     app.get('/', (req, res) => {
