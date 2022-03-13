@@ -22,7 +22,7 @@ async function route(app){
                 console.log('rows = ', res.rows);
                 // res.render('db', {data: res.rows})
             }else{
-                res.end();
+                // res.end();
                 return console.error('error nè nha: ', err.message)
             }
         })
