@@ -40,7 +40,6 @@ app.get('/db', (req, res) =>{
     console.error(err);
     res.send('Error' + err)
   }
-
   // pool.connect(function(err, client, done){
   //   if(err){
   //       return console.error('error fetching client from pool ', err)
