@@ -25,7 +25,7 @@ app.set('views', path.join(__dirname,'resources/views'));
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: true
+  ssl: false
 });
 
 app.get('/db', (req, res) =>{
