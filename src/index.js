@@ -30,8 +30,8 @@ const pool = new Pool({
 
 app.get('/db', (req, res) =>{
   try{
-    const client = await pool.connect();
-    const result = await client.query('select * from position')
+    const client = pool.connect();
+    const result = client.query('select * from position')
     const results = {
         'results': (result) ? result.rows : null
     }
