@@ -10,9 +10,9 @@ const app = express()
 const port = process.env.PORT
 
 
-env.config({
-  path:__dirname + '/.env',
-})
+// env.config({
+//   path:__dirname + '/.env',
+// })
 app.use(express.static(path.join(__dirname,'public')))
 
 app.listen(port || 5001, () => {

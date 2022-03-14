@@ -4,45 +4,51 @@ const {Pool} = require('pg')
 const {migrate} = require('postgres-migrations')
 const env = require('dotenv');
 
-env.config()
+// env.config()
+// env.config({
+//     path:__dirname + '.../.env',
+//   })
+env.config({
+    path:'./.env'
+})
 
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: process.env.DATABASE_URL ? true : false
 })
-
+console.log(' pool = '+ pool)
 async function route(app){
 
 
     app.get('/db', (req, res) => {
-        pool.connect();
-        pool.query('select * from position', (err, res) => {
-            if(!err){
-                console.log('rows = ', res.rows);
-                // res.render('db', {data: res.rows})
-            }else{
-                // res.end();
-                return console.error('error nè nha: ', err.message)
-            }
-        })
-        
-        // pool.connect(function(err, client, done){
-        //     if(err){
-        //         return console.error('error fetching client from pool ', err)
+        // pool.connect();
+        // pool.query('select * from position', (err, res) => {
+        //     if(!err){
+        //         console.log('rows = ', res.rows);
+        //         // res.render('db', {data: res.rows})
+        //     }else{
+        //         // res.end();
+        //         return console.error('error nè nha: ', err.message)
         //     }
+        // })
+        
+        pool.connect(function(err, client, done){
+            if(err){
+                return console.error('error fetching client from pool ', err)
+            }
       
-        //     client.query('SELECT * FROM position', (err, result) => {
-        //         done();
+            client.query('SELECT * FROM position', (err, result) => {
+                done();
             
-        //         if(err){
-        //             res.end();
-        //             return console.error('error running query ', err)
-        //         }
-        //         console.log('Data = ', result.rows)
-        //         res.render('db', {data: result.rows})
-        //     });
-        // });
+                if(err){
+                    res.end();
+                    return console.error('error running query ', err)
+                }
+                console.log('Data = ', result.rows)
+                res.render('db', {data: result.rows})
+            });
+        });
     })
       
     app.get('/', (req, res) => {
