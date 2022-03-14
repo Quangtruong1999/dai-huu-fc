@@ -3,6 +3,7 @@ const match_router = require('./matches')
 const {Pool} = require('pg')
 const {migrate} = require('postgres-migrations')
 const env = require('dotenv');
+const { Sequelize } = require('sequelize');
 
 // env.config()
 // env.config({
@@ -13,10 +14,18 @@ env.config({
     path:'./.env'
 })
 
+// const pool = new Pool({
+//     connectionString: process.env.DATABASE_URL,
+//     ssl: process.env.DATABASE_URL ? true : false
+// })
+
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: process.env.DATABASE_URL ? true : false
+    ssl: {
+        rejectUnauthorized: false
+      }
 })
+
 console.log('pool = '+ pool)
 async function route(app){
 
