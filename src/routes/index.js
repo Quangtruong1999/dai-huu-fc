@@ -8,16 +8,16 @@ const env = require('dotenv');
 // env.config({
 //     path:__dirname + '.../.env',
 //   })
+
 env.config({
     path:'./.env'
 })
-
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: process.env.DATABASE_URL ? true : false
 })
-console.log(' pool = '+ pool)
+console.log('pool = '+ pool)
 async function route(app){
 
 
