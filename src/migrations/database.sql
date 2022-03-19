@@ -16,7 +16,8 @@ CREATE TABLE IF NOT EXISTS contact(
 CREATE TABLE IF NOT EXISTS manager(
     ID SERIAL,
     full_name VARCHAR(255),
-    nationality 
+    nationality VARCHAR(255),
+    current_team int
 )
 
 
