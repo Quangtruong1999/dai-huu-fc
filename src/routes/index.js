@@ -17,7 +17,6 @@ const pool = new Pool({
       }
 })
 
-console.log('pool = '+ pool)
 async function route(app){
 
 

@@ -18,12 +18,15 @@ app.listen(port || 5001, () => {
 //HTTP logger
 // app.use(morgan('combined'))
 
-//Templates engine
-app.engine('handlebars', engine());
-app.set('view engine', 'handlebars');
-console.log('path = ',path.join(__dirname,'resources/views') )
-app.set('views', path.join(__dirname,'resources/views'));
+// //Templates engine
+// app.engine('handlebars', engine());
+// app.set('view engine', 'handlebars');
+// console.log('path = ',path.join(__dirname,'resources/views') )
+// app.set('views', path.join(__dirname,'resources/views'));
 
+//Config ejs
+app.set("view engine", "ejs");
+app.set('views', path.join(__dirname,'resources/views'));
 
 route(app);
 //router
