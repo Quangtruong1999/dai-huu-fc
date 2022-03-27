@@ -8,7 +8,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Soccer BootStrap HTML5 CSS3 Theme</title>
+	<title>Đại Hữu FC</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -128,7 +128,7 @@
 														</a>
 													</li>
 												</ul>
-												{{!-- <ul>
+												<!-- <ul>
 													<li><a href="javascript()" data-toggle="modal" data-target="#tg-login">login</a></li>
 													<li><a href="javascript()" data-toggle="modal" data-target="#tg-register">Register</a></li>
 													<li>
@@ -187,7 +187,7 @@
 													<li>
 														<a id="tg-btn-search" href="javascript:void(0)"><i class="fa fa-search"></i></a>
 													</li>
-												</ul> --}}
+												</ul> -->
 											</nav>
 										</div>
 										<div class="tg-colhalf">
@@ -225,8 +225,8 @@
 											<li>
 												<a href="#">Giới thiệu</a>
 												<ul class="tg-dropdown-menu">
-													<li><a href="#">Giới thiệu ban lãnh đạo</a></li>
-													<li><a href="#">Giới thiệu CLB</a></li>
+													<li><a href="chairman">Giới thiệu ban lãnh đạo</a></li>
+													<li><a href="information">Giới thiệu CLB</a></li>
 													<li><a href="#">Sứ mệnh tầm nhìn</a></li>
 												</ul>
 											</li>
@@ -284,11 +284,11 @@
 				<div class="row">
 					<div class="tg-banner-content tg-haslayout">
 						<div class="tg-pagetitle">
-							<h1>players Version 1</h1>
+							<h1>Đội hình</h1>
 						</div>
 						<ol class="tg-breadcrumb">
-							<li><a href="#">Home</a></li>
-							<li class="active">players Version 1</li>
+							<li><a href="/team">Team</a></li>
+							<li class="active">Đội hình</li>
 						</ol>
 					</div>
 				</div>
@@ -304,7 +304,7 @@
 			<!--************************************
 					Ban huấn luyện Start
 			*************************************-->
-			<section class="tg-main-section tg-haslayout">
+			<!-- <section class="tg-main-section tg-haslayout">
 				<div class="container">
 					<div class="tg-section-name">
 						<h2>Ban huấn luyện</h2>
@@ -483,13 +483,15 @@
 						</div>
 					</div>
 				</div>
-			</section>
+			</section> -->
 			<!--************************************
 					Ban huấn luyện End
 			*************************************-->
 			<!--************************************
 					Thủ môn Start
 			*************************************-->
+			<!-- <%=players%> -->
+			
 			<section class="tg-main-section tg-haslayout">
 				<div class="container">
 					<div class="tg-section-name">
@@ -501,169 +503,32 @@
 								<div class="row">
 									<div class="col-md-7 col-sm-12 col-xs-12">
 										<div id="tg-playerscrollbar" class="tg-players tg-playerscrollbar">
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
+											<% for(var i=0; i<players.length; i++){%>
+												<% if(players[i]['position_id'] == 1){ %>
+													<div class="tg-player">
+														<div class="col-sm-6 col-xs-6 pull-right">
+															<div class="tg-playcontent">
+																<a class="tg-theme-tag" href="#">Thủ môn</a>
+																<h3><a href="#"><%=players[i]['full_name']%></a></h3>
+																<div class="tg-description">
+																	<p>Số áo: <span><%=players[i]['number_position']%></span></p>
+																	<p>Chiều cao: <span><%=players[i]['heights']%>cm</span></p>
+																	<p>Cân nặng: <span><%=players[i]['weights']%>kg</span></p>
+																</div>
+															</div>
 														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-01.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
+														<div class="col-sm-6 col-xs-6">
+															<figure>
+																<a href="#">
+																	<img src="<%=players[i]['images']%>" alt="=players[i]['full_name']">
+																</a>
+															</figure>
 														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
 													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-02.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
-														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-03.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
-														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-01.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
-														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-02.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
-														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-03.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-										</div>
+												<%}%>
+											<%}%>	
 									</div>
-									<div class="col-md-5 col-sm-12 col-xs-12">
-										<div class="tg-contentbox">
-											<div class="tg-section-heading"><h2>consectetur adipisicing elit sed do eiusmid tempor incididunt labore</h2></div>
-											<div class="tg-description">
-												<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt utia labore et dolore magna aliqua enim ad minim veniam quistrud on ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum doloreeu fugiat nulla pariatur cepteur sint occaecat.</p>
-											</div>
-											<div class="tg-btnbox">
-												<a class="tg-btn" href="#"><span>view all</span></a>
-											</div>
-										</div>
-									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -687,169 +552,34 @@
 								<div class="row">
 									<div class="col-md-7 col-sm-12 col-xs-12">
 										<div id="tg-playerscrollbar" class="tg-players tg-playerscrollbar">
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
+											<% for(var i=0; i<players.length; i++){%>
+												<% if(players[i]['position_id'] == 9){ %>
+													<div class="tg-player">
+														<div class="col-sm-6 col-xs-6 pull-right">
+															<div class="tg-playcontent">
+																<a class="tg-theme-tag" href="#">Hậu vệ</a>
+																<h3><a href="#"><%=players[i]['full_name']%></a></h3>
+																<div class="tg-description">
+																	<p>Số áo: <span><%=players[i]['number_position']%></span></p>
+																	<p>Chiều cao: <span><%=players[i]['heights']%>cm</span></p>
+																	<p>Cân nặng: <span><%=players[i]['weights']%>kg</span></p>
+																</div>
+															
+															</div>
 														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-01.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
+														<div class="col-sm-6 col-xs-6">
+															<figure>
+																<a href="#">
+																	<img src="<%=players[i]['images']%>" alt="=players[i]['full_name']">
+																</a>
+															</figure>
 														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
 													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-02.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
-														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-03.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
-														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-01.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
-														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-02.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
-														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-03.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
+												<%}%>
+											<%}%>
 										</div>
 									</div>
-									<div class="col-md-5 col-sm-12 col-xs-12">
-										<div class="tg-contentbox">
-											<div class="tg-section-heading"><h2>consectetur adipisicing elit sed do eiusmid tempor incididunt labore</h2></div>
-											<div class="tg-description">
-												<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt utia labore et dolore magna aliqua enim ad minim veniam quistrud on ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum doloreeu fugiat nulla pariatur cepteur sint occaecat.</p>
-											</div>
-											<div class="tg-btnbox">
-												<a class="tg-btn" href="#"><span>view all</span></a>
-											</div>
-										</div>
-									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -873,169 +603,34 @@
 								<div class="row">
 									<div class="col-md-7 col-sm-12 col-xs-12">
 										<div id="tg-playerscrollbar" class="tg-players tg-playerscrollbar">
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
+											<% for(var i=0; i<players.length; i++){%>
+												<% if(players[i]['position_id'] == 2){ %>
+													<div class="tg-player">
+														<div class="col-sm-6 col-xs-6 pull-right">
+															<div class="tg-playcontent">
+																<a class="tg-theme-tag" href="#">Tiền vệ</a>
+																<h3><a href="#"><%=players[i]['full_name']%></a></h3>
+																<div class="tg-description">
+																	<p>Số áo: <span><%=players[i]['number_position']%></span></p>
+																	<p>Chiều cao: <span><%=players[i]['heights']%>cm</span></p>
+																	<p>Cân nặng: <span><%=players[i]['weights']%>kg</span></p>
+																</div>
+															
+															</div>
 														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-01.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
+														<div class="col-sm-6 col-xs-6">
+															<figure>
+																<a href="#">
+																	<img src="<%=players[i]['images']%>" alt="=players[i]['full_name']">
+																</a>
+															</figure>
 														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
 													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-02.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
-														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-03.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
-														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-01.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
-														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-02.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
-														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-03.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
+												<%}%>
+											<%}%>
 										</div>
 									</div>
-									<div class="col-md-5 col-sm-12 col-xs-12">
-										<div class="tg-contentbox">
-											<div class="tg-section-heading"><h2>consectetur adipisicing elit sed do eiusmid tempor incididunt labore</h2></div>
-											<div class="tg-description">
-												<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt utia labore et dolore magna aliqua enim ad minim veniam quistrud on ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum doloreeu fugiat nulla pariatur cepteur sint occaecat.</p>
-											</div>
-											<div class="tg-btnbox">
-												<a class="tg-btn" href="#"><span>view all</span></a>
-											</div>
-										</div>
-									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -1059,169 +654,34 @@
 								<div class="row">
 									<div class="col-md-7 col-sm-12 col-xs-12">
 										<div id="tg-playerscrollbar" class="tg-players tg-playerscrollbar">
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
+											<% for(var i=0; i<players.length; i++){%>
+												<% if(players[i]['position_id'] == 3){ %>
+													<div class="tg-player">
+														<div class="col-sm-6 col-xs-6 pull-right">
+															<div class="tg-playcontent">
+																<a class="tg-theme-tag" href="#">Tiền đạo</a>
+																<h3><a href="#"><%=players[i]['full_name']%></a></h3>
+																<div class="tg-description">
+																	<p>Số áo: <span><%=players[i]['number_position']%></span></p>
+																	<p>Chiều cao: <span><%=players[i]['heights']%>cm</span></p>
+																	<p>Cân nặng: <span><%=players[i]['weights']%>kg</span></p>
+																</div>
+															
+															</div>
 														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-01.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
+														<div class="col-sm-6 col-xs-6">
+															<figure>
+																<a href="#">
+																	<img src="<%=players[i]['images']%>" alt="=players[i]['full_name']">
+																</a>
+															</figure>
 														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
 													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-02.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
-														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-03.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
-														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-01.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
-														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"	></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-02.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
-											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
-													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">SWEEPER</a>
-														<h3><a href="#">Hustlin’ Owls</a></h3>
-														<span class="tg-stars"><span></span></span>
-														<div class="tg-description">
-															<p>Incididunt utia labore et dolore siti magna aliqua adinim lipat</p>
-														</div>
-														<ul class="tg-socialicons">
-															<li><a href="https://www.facebook.com/DaiHuuFC"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-															<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="images/player/img-03.png" alt="image description">
-														</a>
-													</figure>
-												</div>
-											</div>
+												<%}%>
+											<%}%>
 										</div>
 									</div>
-									<div class="col-md-5 col-sm-12 col-xs-12">
-										<div class="tg-contentbox">
-											<div class="tg-section-heading"><h2>consectetur adipisicing elit sed do eiusmid tempor incididunt labore</h2></div>
-											<div class="tg-description">
-												<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt utia labore et dolore magna aliqua enim ad minim veniam quistrud on ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum doloreeu fugiat nulla pariatur cepteur sint occaecat.</p>
-											</div>
-											<div class="tg-btnbox">
-												<a class="tg-btn" href="#"><span>view all</span></a>
-											</div>
-										</div>
-									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -1231,294 +691,7 @@
 			<!--************************************
 					Tiền đạo End
 			*************************************-->
-			<!--************************************
-					Testimonials Start
-			*************************************-->
-			<section class="tg-testimonial tg-haslayout tg-bgdark">
-				<div class="container">
-					<div class="row">
-						<div id="tg-testimonial-slider" class="tg-testimonial-slider tg-haslayout">
-							<div class="swiper-wrapper">
-								<div class="swiper-slide">
-									<figure>
-										<img src="images/trophy.png" alt="image description">
-									</figure>
-									<div class="tg-contentbox">
-										<div class="tg-section-heading">
-											<h2>uefa champions league, 2014</h2>
-										</div>
-										<div class="tg-description">
-											<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolorena aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur sint occaecat.</p>
-										</div>
-										<ul class="tg-socialicons">
-											<li>
-												<a href="https://www.facebook.com/DaiHuuFC">
-													<i class="fa fa-facebook"></i>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<i class="fa fa-twitter"></i>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<i class="fa fa-linkedin"></i>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<i class="fa fa-dribbble"></i>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div class="swiper-slide">
-									<figure>
-										<img src="images/trophy.png" alt="image description">
-									</figure>
-									<div class="tg-contentbox">
-										<div class="tg-section-heading">
-											<h2>uefa champions league, 2014</h2>
-										</div>
-										<div class="tg-description">
-											<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolorena aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur sint occaecat.</p>
-										</div>
-										<ul class="tg-socialicons">
-											<li>
-												<a href="https://www.facebook.com/DaiHuuFC">
-													<i class="fa fa-facebook"></i>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<i class="fa fa-twitter"></i>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<i class="fa fa-linkedin"></i>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<i class="fa fa-dribbble"></i>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div class="swiper-slide">
-									<figure>
-										<img src="images/trophy.png" alt="image description">
-									</figure>
-									<div class="tg-contentbox">
-										<div class="tg-section-heading">
-											<h2>uefa champions league, 2014</h2>
-										</div>
-										<div class="tg-description">
-											<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolorena aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur sint occaecat.</p>
-										</div>
-										<ul class="tg-socialicons">
-											<li>
-												<a href="https://www.facebook.com/DaiHuuFC">
-													<i class="fa fa-facebook"></i>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<i class="fa fa-twitter"></i>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<i class="fa fa-linkedin"></i>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<i class="fa fa-dribbble"></i>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div class="swiper-slide">
-									<figure>
-										<img src="images/trophy.png" alt="image description">
-									</figure>
-									<div class="tg-contentbox">
-										<div class="tg-section-heading">
-											<h2>uefa champions league, 2014</h2>
-										</div>
-										<div class="tg-description">
-											<p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolorena aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur sint occaecat.</p>
-										</div>
-										<ul class="tg-socialicons">
-											<li>
-												<a href="https://www.facebook.com/DaiHuuFC">
-													<i class="fa fa-facebook"></i>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<i class="fa fa-twitter"></i>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<i class="fa fa-linkedin"></i>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<i class="fa fa-dribbble"></i>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="tg-themebtnprev"><span class="fa fa-angle-left"></span></div>
-							<div class="tg-themebtnnext"><span class="fa fa-angle-right"></span></div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<!--************************************
-					Testimonials End
-			*************************************-->
-			<!--************************************
-					Our Sponser Start
-			*************************************-->
-			<section class="tg-main-section tg-haslayout">
-				<div class="container">
-					<div class="tg-section-name">
-						<h2>our sponsers</h2>
-					</div>
-					<div class="col-sm-11 col-xs-11 pull-right">
-						<div class="row">
-							<div class="tg-latestresult tg-oursponsers">
-								<div class="row">
-									<div class="col-md-5 col-sm-12 col-xs-12">
-										<div class="tg-contentbox">
-											<div class="tg-section-heading"><h2>consectetur adipisicing elit sedia tempor labore</h2></div>
-											<div class="tg-description">
-												<p>Consectetur adipisicing elit sed do eiusmod temport incididunt utia labore et dolore magna aliqua enima ad minim veniam quistrud on ullamco laboris nisiut aliquip ex ea commodo consequat.</p>
-											</div>
-											<div class="tg-btnbox">
-												<a class="tg-btn" href="#"><span>view all</span></a>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-7 col-sm-12 col-xs-12">
-										<div id="tg-upcomingmatch-slider" class="tg-upcomingmatch-slider tg-upcomingmatch">
-											<div class="swiper-wrapper">
-												<div class="swiper-slide">
-													<div class="tg-match">
-														<div class="tg-matchdetail">
-															<div class="tg-box">
-																<strong class="tg-teamlogo">
-																	<img src="images/sponser/img-01.png" alt="image description">
-																</strong>
-															</div>
-															<div class="tg-box">
-																<span>sponsored in 2016</span>
-																<h3>Champions league</h3>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="swiper-slide">
-													<div class="tg-match">
-														<div class="tg-matchdetail">
-															<div class="tg-box">
-																<strong class="tg-teamlogo">
-																	<img src="images/sponser/img-02.png" alt="image description">
-																</strong>
-															</div>
-															<div class="tg-box">
-																<span>sponsored in 2016</span>
-																<h3>Champions league</h3>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="swiper-slide">
-													<div class="tg-match">
-														<div class="tg-matchdetail">
-															<div class="tg-box">
-																<strong class="tg-teamlogo">
-																	<img src="images/sponser/img-03.png" alt="image description">
-																</strong>
-															</div>
-															<div class="tg-box">
-																<span>sponsored in 2016</span>
-																<h3>Champions league</h3>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="swiper-slide">
-													<div class="tg-match">
-														<div class="tg-matchdetail">
-															<div class="tg-box">
-																<strong class="tg-teamlogo">
-																	<img src="images/sponser/img-01.png" alt="image description">
-																</strong>
-															</div>
-															<div class="tg-box">
-																<span>sponsored in 2016</span>
-																<h3>Champions league</h3>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="swiper-slide">
-													<div class="tg-match">
-														<div class="tg-matchdetail">
-															<div class="tg-box">
-																<strong class="tg-teamlogo">
-																	<img src="images/sponser/img-02.png" alt="image description">
-																</strong>
-															</div>
-															<div class="tg-box">
-																<span>sponsored in 2016</span>
-																<h3>Champions league</h3>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="swiper-slide">
-													<div class="tg-match">
-														<div class="tg-matchdetail">
-															<div class="tg-box">
-																<strong class="tg-teamlogo">
-																	<img src="images/sponser/img-03.png" alt="image description">
-																</strong>
-															</div>
-															<div class="tg-box">
-																<span>sponsored in 2016</span>
-																<h3>Champions league</h3>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="tg-themebtnnext"><span class="fa fa-angle-down"></span></div>
-											<div class="tg-themebtnprev"><span class="fa fa-angle-up"></span></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<!--************************************
-					Our Sponser End
-			*************************************-->
+			
 		</main>
 		<!--************************************
 				Main End
@@ -1535,20 +708,7 @@
 						<div class="row">
 							<div class="col-sm-4">
 								<div class="tg-footercol">
-									<div class="tg-posttitle">
-										<h3>signup newsletter</h3>
-									</div>
-									<div class="tg-description">
-										<p>Adipisicing elit, sed do eiusmod tempor incidunta utiai labore et dolore magna si aliqua quis.</p>
-									</div>
-									<form class="tg-form-newsletter">
-										<fieldset>
-											<div class="form-group">
-												<input type="email" class="form-control" name="email" placeholder="Email">
-											</div>
-											<button class="tg-btn" type="submit">signup</button>
-										</fieldset>
-									</form>
+									
 									<div class="tg-posttitle">
 										<h3>popular tags</h3>
 									</div>
@@ -1567,57 +727,7 @@
 							</div>
 							<div class="col-sm-4">
 								<div class="tg-footercol">
-									<div class="tg-posttitle">
-										<h3>Top products</h3>
-									</div>
-									<div class="tg-toprated">
-										<ul>
-											<li>
-												<figure>
-													<a href="#">
-														<img src="images/thumbnails/img-04.jpg" alt="image description">
-													</a>
-												</figure>
-												<div class="tg-productcontent">
-													<h4><a href="#">Smooth 3-Stripes Scarf</a></h4><span class="tg-stars"><span></span></span>
-													<span class="tg-price">Price: $67</span>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<a href="#">
-														<img src="images/thumbnails/img-05.jpg" alt="image description">
-													</a>
-												</figure>
-												<div class="tg-productcontent">
-													<h4><a href="#">Smooth 3-Stripes Scarf</a></h4><span class="tg-stars"><span></span></span>
-													<span class="tg-price">Price: $67</span>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<a href="#">
-														<img src="images/thumbnails/img-06.jpg" alt="image description">
-													</a>
-												</figure>
-												<div class="tg-productcontent">
-													<h4><a href="#">Smooth 3-Stripes Scarf</a></h4><span class="tg-stars"><span></span></span>
-													<span class="tg-price">Price: $67</span>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<a href="#">
-														<img src="images/thumbnails/img-07.jpg" alt="image description">
-													</a>
-												</figure>
-												<div class="tg-productcontent">
-													<h4><a href="#">Smooth 3-Stripes Scarf</a></h4><span class="tg-stars"><span></span></span>
-													<span class="tg-price">Price: $67</span>
-												</div>
-											</li>
-										</ul>
-									</div>
+									
 								</div>
 							</div>
 							<div class="col-sm-4">

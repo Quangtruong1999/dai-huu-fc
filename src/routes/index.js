@@ -40,6 +40,14 @@ async function route(app){
       
     app.get('/', (req, res) => {
         res.render('home')
+    }) 
+
+    app.get('/chairman', (req, res) => {
+        res.render('chairman')
+    })
+
+    app.get('/information', (req, res) => {
+        res.render('info_dhfc')
     })
       
     app.get('/aboutus', (req, res) => {
@@ -100,18 +108,15 @@ async function route(app){
       
     app.get('/matchresultdetail', (req, res) => {
         res.render('matchresultdetail')
-    })
-      
+    })  
       
     app.get('/playerdetail', (req, res) => {
         res.render('playerdetail')
     })
       
-      
     app.get('/playergrid-v1', (req, res) => {
         res.render('playergrid-v1')
     })
-      
       
     app.get('/playergrid-v2', (req, res) => {
         res.render('playergrid-v2')
