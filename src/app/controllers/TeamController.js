@@ -1,7 +1,7 @@
 class TeamController{
 
     index(req, res){
-        res.render('playergrid-v2')
+        res.render('playergrid-v1')
     }
 }
 
