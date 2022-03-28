@@ -520,7 +520,12 @@
 														<div class="col-sm-6 col-xs-6">
 															<figure>
 																<a href="#">
-																	<img src="<%=players[i]['images']%>" alt="=players[i]['full_name']">
+																	<%if(players[i]['images'] == ''){%>
+																		<img src="images/half_body.png">
+																	<%}%>
+																	<%if(players[i]['images'] != ''){%>
+																		<img src="<%=players[i]['images']%>"/>
+																	<%}%>
 																</a>
 															</figure>
 														</div>
@@ -570,7 +575,12 @@
 														<div class="col-sm-6 col-xs-6">
 															<figure>
 																<a href="#">
-																	<img src="<%=players[i]['images']%>" alt="=players[i]['full_name']">
+																	<%if(players[i]['images'] == ''){%>
+																		<img src="images/half_body.png">
+																	<%}%>
+																	<%if(players[i]['images'] != ''){%>
+																		<img src="<%=players[i]['images']%>"/>
+																	<%}%>
 																</a>
 															</figure>
 														</div>
@@ -621,7 +631,12 @@
 														<div class="col-sm-6 col-xs-6">
 															<figure>
 																<a href="#">
-																	<img src="<%=players[i]['images']%>" alt="=players[i]['full_name']">
+																	<%if(players[i]['images'] == ''){%>
+																		<img src="images/half_body.png">
+																	<%}%>
+																	<%if(players[i]['images'] != ''){%>
+																		<img src="<%=players[i]['images']%>"/>
+																	<%}%>
 																</a>
 															</figure>
 														</div>
@@ -672,7 +687,12 @@
 														<div class="col-sm-6 col-xs-6">
 															<figure>
 																<a href="#">
-																	<img src="<%=players[i]['images']%>" alt="=players[i]['full_name']">
+																	<%if(players[i]['images'] == ''){%>
+																		<img src="images/half_body.png">
+																	<%}%>
+																	<%if(players[i]['images'] != ''){%>
+																		<img src="<%=players[i]['images']%>"/>
+																	<%}%>
 																</a>
 															</figure>
 														</div>
