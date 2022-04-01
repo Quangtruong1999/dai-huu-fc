@@ -16,10 +16,8 @@ const pool = new Pool({
         rejectUnauthorized: false
       }
 })
-
+    
 async function route(app){
-
-
     app.get('/db', (req, res) => {
         pool.connect(function(err, client, done){
             if(err){

@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS partners(
     full_name VARCHAR(255),
     link_web VARCHAR(255),
     content INT4,
+    img TEXT,
     CONSTRAINT A_PARTNERS_PK PRIMARY KEY (ID)
 );
 
@@ -103,6 +104,15 @@ CREATE TABLE IF NOT EXISTS recruitment(
     create_at DATE,
     link TEXT,
     CONSTRAINT A_RECRUITMENT_PK PRIMARY KEY (ID)
+);
+
+--Create a users
+CREATE TABLE IF NOT EXISTS users(
+    ID SERIAL,
+    name VARCHAR(255),
+    password VARCHAR(255),
+    email VARCHAR(255),
+    CONSTRAINT A_USER_PK PRIMARY KEY (ID)
 );
 
 -- ALTER TABLE manager ADD CONSTRAINT FK_MANAGER_POSITION FOREIGN KEY (position_id) REFERENCES position (ID);
@@ -240,7 +250,15 @@ VALUES ('Xabier Mancisidor', 'Việt Nam', 14, 6, 'src\public\images\player\Medi
 INSERT INTO staff (full_name, nationality, current_team, position_id, images)
 VALUES ('Carlos Vicens', 'Việt Nam', 14, 7, 'src\public\images\player\Physiotherapist\Carlos Vicens.png');
 
-
+--insert into partners tables
+INSERT INTO partners (full_name, link_web, img)
+VALUES ('Sony Việt Nam', 'https://www.sony.com.vn/electronics/corporate', 'images/partners/sony.jpg');
+INSERT INTO partners (full_name, link_web, img)
+VALUES ('Ngân hàng TMCP Sài Gòn-Hà Nội', 'https://www.shb.com.vn/', 'images/partners/shb.png');
+INSERT INTO partners (full_name, link_web, img)
+VALUES ('Ngân hàng Công thương Việt Nam', 'https://www.vietinbank.vn/web/home/vn/index.html', 'images/partners/vietinbank.png');
+INSERT INTO partners (full_name, link_web, img)
+VALUES ('Ngân hàng TMCP Ngoại thương Việt Nam', 'https://portal.vietcombank.com.vn/Pages/Home.aspx', 'images/partners/vcb.png');
 -- INSERT INTO position (name) VALUES ('Tiền vệ');
 -- INSERT INTO position (name) VALUES ('Tiền đạo');
 -- INSERT INTO position (name) VALUES ('HLV Trưởng');
