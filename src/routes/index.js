@@ -473,6 +473,12 @@ async function route(app){
         console.log('player_id = ', player_id);
         // pool.connect(function(err, client, done){
         //     if(err){
+        //         throw err;
+        //     }
+        //     client.query(`DELETE FROM players`)
+        // })
+        // pool.connect(function(err, client, done){
+        //     if(err){
         //         return console.error('error fetching client from pool ', err)
         //     }
         //     client.query('SELECT * FROM position WHERE position.id not in (SELECT staff.position_id FROM staff)', (err, result) => {

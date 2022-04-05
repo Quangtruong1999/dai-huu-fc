@@ -28,7 +28,6 @@ class TeamController{
                     res.end()
                     return console.error('error running query ', err)
                 }
-                player = result.rows
                 // data['staff'] = result.rows
                 
                 res.render('playergrid-v1', {players: result.rows})
