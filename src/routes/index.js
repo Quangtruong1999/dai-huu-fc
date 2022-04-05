@@ -576,11 +576,6 @@ async function route(app){
                     res.end()
                     return console.error('error running query ', err)
                 }
-                player = result.rows
-                data['staff'] = result.rows
-                console.log('staff trong = ', player)
-                console.log('data strong = ', data)
-                
                 res.render('info_staff', {players: result.rows})
                 // res.render('shop11', {data: product_list})
             });
