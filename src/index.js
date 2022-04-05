@@ -19,7 +19,7 @@ app.use(session({
   secret: 'secrect',
   resave: true,
   saveUninitialized: true,
-  cookie: { maxAge: 60000 }
+  cookie: { maxAge: 60000000 }
 }));
 app.use(express.static(path.join(__dirname,'public')))
 
@@ -50,6 +50,7 @@ const pool = new Pool({
       rejectUnauthorized: false
     }
 })
+
 
 app.get('/signup', (req, res) => {
   res.render('signup');
@@ -126,7 +127,7 @@ app.post('/login',urlencodedParser, async function(req, res) {
   console.log('email = ', email)
   pool.query(`SELECT * FROM users WHERE email = $1`, [email] , (err, rows) => {
       console.log('rows = ', rows);
-      if (rows.length<=0) { res.redirect("/login"); return;}
+      if (rows.length <= 0) { res.redirect("/login"); return;}
       let user = rows['rows'][0];    
       console.log('user = ', user);
       let errors = []
@@ -147,7 +148,7 @@ app.post('/login',urlencodedParser, async function(req, res) {
               res.redirect(sess.back);
             }
             else {
-                res.redirect("/");
+                res.redirect("/web");
             }                   
         }   
         else {
