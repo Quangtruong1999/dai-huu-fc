@@ -234,7 +234,9 @@ async function route(app){
                 if(err){
                     return console.error('error fetching client from pool ', err)
                 }
-                client.query('SELECT * FROM staff, position where position_id = position.id', (err, result) => {
+                client.query(`SELECT staff.id, staff.full_name, staff.position_id, staff.images, position.name
+                FROM staff, position
+                WHERE staff.position_id = position.id`, (err, result) => {
                     done();
                     
                     if(err){
@@ -468,6 +470,27 @@ async function route(app){
         }
     })
 
+    
+    app.post('/edit_player/:id', (req, res) => {
+        if(typeof req.session.user == 'undefined'){
+            res.redirect('/login');
+        }else{
+            pool.connect(function(err, client, done){
+                if(err){
+                    return console.error('error fetching client from pool ', err)
+                }
+                client.query('SELECT * FROM position WHERE position.id not in (SELECT staff.position_id FROM staff)', (err, result) => {
+                    done();
+                    
+                    if(err){
+                        throw err;
+                    }
+                    res.render('product_add', {positions: result.rows});
+                });
+            });
+        }
+    })
+
     app.get('/del_player/:id', (req, res) => {
         const player_id = req.params.id;
         console.log('player_id = ', player_id);
@@ -483,21 +506,26 @@ async function route(app){
                 res.redirect('/web');
             })
         })
-        // pool.connect(function(err, client, done){
-        //     if(err){
-        //         return console.error('error fetching client from pool ', err)
-        //     }
-        //     client.query('SELECT * FROM position WHERE position.id not in (SELECT staff.position_id FROM staff)', (err, result) => {
-        //         done();
-                    
-        //         if(err){
-        //             throw err;
-        //         }
-        //         res.render('product_add', {positions: result.rows});
-        //     });
-        // });
+        
     })
-
+    
+    app.get('/del_staff/:id', (req, res) => {
+        const staff_id = req.params.id;
+        console.log('player_id = ', staff_id);
+        pool.connect(function(err, client, done){
+            if(err){
+                throw err;
+            }
+            client.query(`DELETE FROM staff WHERE id = $1`,[staff_id], (err, result)=>{
+                if (err){
+                    throw err;
+                }
+                console.log('xóa thành công');
+                res.redirect('/staff');
+            })
+        })
+        
+    })
 
     app.post('/player_add', urlencodedParser, upload.single('image'), (req, res) => {
         if(typeof req.session.user == 'undefined'){
