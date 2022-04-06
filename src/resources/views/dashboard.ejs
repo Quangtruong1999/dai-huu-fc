@@ -272,7 +272,12 @@
                                                     <span class="status--process"><%=data[i]['weights']%>kg</span>
                                                 </td>
                                                 <td><%=data[i]['number_position']%></td>
-                                                <td><img src="<%=data[i]['images']%>"/></td>
+                                                <% if(data[i]['images'] != ''){%>
+                                                    <td><img width="100px" height="100px" src="<%=data[i]['images']%>" alt="<%=data[i]['full_name']%>"/></td>
+                                                <%}else{%>
+                                                    <td><img width="100px" height="100px" src="images/half_body.png" alt="<%=data[i]['full_name']%>"/></td>
+                                
+                                                <%}%>
                                                 <td>
                                                     <div class="table-data-feature">
                                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
