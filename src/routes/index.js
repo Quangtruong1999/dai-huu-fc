@@ -470,24 +470,30 @@ async function route(app){
         }
     })
 
-    
-    app.post('/edit_player/:id', (req, res) => {
+    app.get('/edit_player/:id', async(req, res) => {
         if(typeof req.session.user == 'undefined'){
             res.redirect('/login');
         }else{
-            pool.connect(function(err, client, done){
-                if(err){
-                    return console.error('error fetching client from pool ', err)
-                }
-                client.query('SELECT * FROM position WHERE position.id not in (SELECT staff.position_id FROM staff)', (err, result) => {
-                    done();
-                    
-                    if(err){
-                        throw err;
-                    }
-                    res.render('product_add', {positions: result.rows});
-                });
-            });
+            const info_player = await pool.query(`select * from players where id = $1`, [req.params.id])
+            const positions = await pool.query(`select * from position`)
+            console.log('player = ', info_player.rows)
+            console.log('position = ', positions.rows)
+            res.render('edit_player',{
+                info_player:info_player.rows,
+                name: req.session.name,
+                email: req.session.email,
+                position: positions.rows
+            })
+        }
+    })
+    
+    app.post('/edit_player/:id', async(req, res) => {
+        if(typeof req.session.user == 'undefined'){
+            res.redirect('/login');
+        }else{
+            const info_player = await pool.query(`select * from players where id = $1`, [req.params.id])
+            console.log('player = ', info_player)
+            res.render('product_add')
         }
     })
 
