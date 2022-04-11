@@ -14,7 +14,7 @@ const pool = new Pool({
 class TeamController{
 
     index(req, res){
-        
+
         pool.connect(function(err, client, done){
             if(err){
                 return console.error('error fetching client from pool ', err)

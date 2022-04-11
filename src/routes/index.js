@@ -196,6 +196,7 @@ async function route(app){
         if(typeof req.session.user == 'undefined'){
             res.redirect('/login');
         }else{
+            
             pool.connect(function(err, client, done){
                 if(err){
                     return console.error('error fetching client from pool ', err)
@@ -218,7 +219,11 @@ async function route(app){
                     }
                     console.log('Data = ', result.rows);
                     console.log('data sau khi format = ', results);
-                    res.render('dashboard', {data: results,user_name: 'Ngô Quang Trường', user_email: 'quang.truong21051999@gmail.com'});
+                    res.render('dashboard', {
+                        data: results,
+                        user_name: req.session.name, 
+                        user_email: req.session.email,
+                    });
                 });
             });
             // res.render('dashboard');
@@ -470,7 +475,34 @@ async function route(app){
         }
     })
 
-    app.get('/edit_player/:id', async(req, res) => {
+    app.get('/staff_edit/:id', async(req, res) => {
+        if(typeof req.session.user == 'undefined'){
+            res.redirect('/login');
+        }else{
+            const info_player = await pool.query(`select * from staff where id = $1`, [req.params.id])
+            const positions = await pool.query(`select * from position`)
+            console.log('player = ', info_player.rows)
+            console.log('position = ', positions.rows)
+            res.render('staff_edit',{
+                info_player:info_player.rows,
+                name: req.session.name,
+                email: req.session.email,
+                position: positions.rows
+            })
+        }
+    })
+    
+    app.post('/staff_edit/:id', async(req, res) => {
+        if(typeof req.session.user == 'undefined'){
+            res.redirect('/login');
+        }else{
+            const info_player = await pool.query(`select * from staff where id = $1`, [req.params.id])
+            console.log('player = ', info_player)
+            res.render('staff_edit')
+        }
+    })
+
+    app.get('/player_edit/:id', async(req, res) => {
         if(typeof req.session.user == 'undefined'){
             res.redirect('/login');
         }else{
@@ -487,7 +519,7 @@ async function route(app){
         }
     })
     
-    app.post('/edit_player/:id', async(req, res) => {
+    app.post('/player_edit/:id', async(req, res) => {
         if(typeof req.session.user == 'undefined'){
             res.redirect('/login');
         }else{
@@ -564,7 +596,7 @@ async function route(app){
     //     }
     // });
       
-    app.get('/', (req, res) => {
+    app.get('/', async (req, res) => {
         // res.render('home')
         pool.connect(function(err, client, done){
             if(err){
@@ -589,20 +621,31 @@ async function route(app){
 
     }) 
 
-    app.get('/chairman', (req, res) => {
-        res.render('chairman')
+    app.get('/chairman', async (req, res) => {
+        const partners = await pool.query(`select * from partners`);
+        res.render('chairman', {partners: partners.rows})
     })
 
     app.get('/information', (req, res) => {
         res.render('info_dhfc')
     })
       
-    app.get('/aboutus', (req, res) => {
-        res.render('aboutus')
+    app.get('/aboutus', async (req, res) => {
+        const partners = await pool.query(`select * from partners`);
+        res.render('aboutus', {partners: partners.rows})
     })
     
-    app.use('/team', team_router)  
-    app.get('/info_staff', (req, res)=>{
+    // app.use('/team', team_router) 
+    app.get('/team', async(req, res)=>{
+        const players = await pool.query(`select * from players`);
+        const partners = await pool.query(`select * from partners`);
+        res.render('playergrid-v1', {
+            players: players.rows,
+            partners: partners.rows,
+        })
+    }) 
+    app.get('/info_staff', async (req, res)=>{
+        const partners = await pool.query(`select * from partners`);
         pool.connect(function(err, client, done){
             if(err){
                 return console.error('error fetching client from pool ', err)
@@ -616,7 +659,7 @@ async function route(app){
                     res.end()
                     return console.error('error running query ', err)
                 }
-                res.render('info_staff', {players: result.rows})
+                res.render('info_staff', {players: result.rows, partners:partners.rows})
                 // res.render('shop11', {data: product_list})
             });
             
@@ -639,12 +682,14 @@ async function route(app){
         res.render('buyticket')
     })
       
-    app.get('/comming-soon', (req, res) => {
-        res.render('comming-soon')
+    app.get('/comming-soon', async (req, res) => {
+        const partners = await pool.query(`select * from partners`);
+        res.render('comming-soon', {partners: partners.rows})
     })
       
-    app.get('/contactus', (req, res) => {
-        res.render('contactus')
+    app.get('/contactus', async (req, res) => {
+        const partners = await pool.query(`select * from partners`);
+        res.render('contactus', {partners: partners.rows})
     })
       
     app.get('/fixturedetail', (req, res) => {
@@ -705,8 +750,9 @@ async function route(app){
     })
       
       
-    app.get('/soccermedia-1', (req, res) => {
-        res.render('soccermedia-1')
+    app.get('/soccermedia-1', async (req, res) => {
+        const partners = await pool.query(`select * from partners`);
+        res.render('soccermedia-1', {partners: partners.rows})
     })
       
       
@@ -715,8 +761,10 @@ async function route(app){
     })
       
     
-    app.get('/404', (req, res) => {
-        res.render('404')
+    app.get('/404', async (req, res) => {
+        
+        const partners = await pool.query(`select * from partners`);
+        res.render('404', {partners: partners.rows})
     })
 }
 
