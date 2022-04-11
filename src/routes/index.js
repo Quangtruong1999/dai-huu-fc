@@ -566,6 +566,10 @@ async function route(app){
     // })
     // route media end
 
+    // route customers start
+    
+    //route customers end
+
     // route partners start
     app.get('/partners', async (req, res) => {
         if(typeof req.session.user == 'undefined'){
