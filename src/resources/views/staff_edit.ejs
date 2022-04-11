@@ -263,7 +263,20 @@
                                         </select>
                                     </div>
                                 </div>
-                                
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="image_player" class="form-control-label">Ảnh</label>
+                                    </div>
+                                    <%if(info_staff[0]['images'] == ''){%>
+                                        <div class="col-12 col-md-9">
+                                            <img id="image_player" width="200px" src="/images/half_body.png" alt=""/>
+                                        </div>
+                                    <%}else{%>
+                                        <div class="col-12 col-md-9">
+                                            <img id="image_player" src="/<%=info_staff[0]['images']%>" alt="<%=info_staff[0]['full_name']%>"/>
+                                        </div>
+                                    <%}%>
+                                </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="image" class=" form-control-label">Hình ảnh</label>
