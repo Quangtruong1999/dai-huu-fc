@@ -8,7 +8,7 @@
         <meta name="keywords" content="au theme template">
 
         <!-- Title Page-->
-        <title>Đại Hữu FC - Dashboard</title>
+        <title>Đại Hữu FC - Dashboard Partners</title>
 
         <!-- Fontfaces CSS-->
         <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -104,18 +104,6 @@
                                         <a href="/customer_dashboard">
                                         <i class="fas fa-chart-bar"></i>Quản lý người dùng</a>
                                     </li>
-                                    <li>
-                                        <a href="/customer_dashboard">
-                                        <i class="fab fa-airbnb"></i>Quản lý đối tác</a>
-                                    </li>
-                                    <li>
-                                        <a href="/customer_dashboard">
-                                        <i class="fas fa-chart-bar"></i>Quản lý tin tức</a>
-                                    </li>
-                                    <li>
-                                        <a href="/customer_dashboard">
-                                        <i class="fas fa-chart-bar"></i>Quản lý media</a>
-                                    </li>
                                 </ul>
                             </div>
                         </nav>
@@ -149,7 +137,7 @@
                                         <i class="fas fa-address-book"></i>Quản lý người dùng</a>
                                     </li>
                                     <li>
-                                        <a href="/partners">
+                                        <a href="/customer_dashboard">
                                         <i class="fas fa-address-book"></i>Quản lý đối tác</a>
                                     </li>
                                     <li>
@@ -186,10 +174,10 @@
                                     <div class="account-wrap">
                                         <div class="account-item clearfix js-item-menu">
                                             <div class="image">
-                                                <img src="images/icon/avatar-01.jpg" alt="<%=user_name %>" />
+                                                <img src="images/icon/avatar-01.jpg" alt="<%=name %>" />
                                             </div>
                                             <div class="content">
-                                                <a class="js-acc-btn" href="#"><%=user_name %></a>
+                                                <a class="js-acc-btn" href="#"><%=name %></a>
                                             </div>
                                             <div class="account-dropdown js-dropdown">
                                                 <div class="info clearfix">
@@ -200,9 +188,9 @@
                                                     </div>
                                                     <div class="content">
                                                         <h5 class="name">
-                                                            <a href="#"><%=user_name %></a>
+                                                            <a href="#"><%=name %></a>
                                                         </h5>
-                                                        <span class="email"><%=user_email %></span>
+                                                        <span class="email"><%=email %></span>
                                                     </div>
                                                 </div>
                                                 <div class="account-dropdown__body">
@@ -237,7 +225,7 @@
                 <div class="main-content">
                     <div class="col-md-12">
                         <!-- DATA TABLE -->
-                        <h3 class="title-5 m-b-35">Quản lý cầu thủ</h3>
+                        <h3 class="title-5 m-b-35">Ban huấn luyện</h3>
                         <div class="table-data__tool">
                             <!-- <div class="table-data__tool-left">
                                 <div class="rs-select2--light rs-select2--md">
@@ -261,7 +249,7 @@
                             </div> -->
                             <div class="table-data__tool-right">
                                 <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                    <i class="zmdi zmdi-plus"></i><a href="/player_add" style="text-decoration: none; color: rgb(255, 255, 255);">Thêm cầu thủ</a></button>
+                                    <i class="zmdi zmdi-plus"></i><a href="/partners_add" style="text-decoration: none; color: rgb(255, 255, 255);">Thêm đối tác</a></button>
                                 <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                                     <select class="js-select2" name="type">
                                         <option selected="selected">Xuất file</option>
@@ -278,41 +266,32 @@
                                     <thead>
                                         <tr>
                                             
-                                            <th>Tên cầu thủ</th>
-                                            <th>Vị trí</th>
-                                            <th>Sinh nhật</th>
-                                            <th>Chiều cao</th>
-                                            <th>Cân nặng</th>
-                                            <th>Số áo</th>
+                                            <th>Tên đối tác</th>
+                                            <th>Website</th>
                                             <th>Hình ảnh</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% for(var i=0; i<data.length; i++){%>
+                                        <% for(var i=0; i<partners.length; i++){%>
                                             <tr class="tr-shadow">
                                                 
-                                                <td><%=data[i]['full_name']%></td>
-                                                <td><%=data[i]['name']%></td>
-                                                <td class="desc"><%=data[i]['birthday']%></td>
-                                                <td><%=data[i]['heights']%>cm</td>
-                                                <td>
-                                                    <span class="status--process"><%=data[i]['weights']%>kg</span>
-                                                </td>
-                                                <td><%=data[i]['number_position']%></td>
-                                                <% if(data[i]['images'] != ''){%>
-                                                    <td><img width="100px" height="100px" src="<%=data[i]['images']%>" alt="<%=data[i]['full_name']%>"/></td>
+                                                <td><%=partners[i]['full_name']%></td>
+                                                <td><a href="<%=partners[i]['link_web']%>" target="_blanket"><%=partners[i]['link_web']%></a></td>
+                                                <% if(partners[i]['img'] != ''){%>
+                                                    <td><img width="100px" height="100px" src="<%=partners[i]['img']%>" alt="<%=partners[i]['full_name']%>"/></td>
                                                 <%}else{%>
-                                                    <td><img width="100px" height="100px" src="images/half_body.png" alt="<%=data[i]['full_name']%>"/></td>
+                                                    <td><img width="100px" height="100px" src="images/half_body.png" alt="<%=partners[i]['full_name']%>"/></td>
                                 
                                                 <%}%>
+                                                <!-- <td><img src="<%=partners[i]['images']%>"/></td> -->
                                                 <td>
                                                     <div class="table-data-feature">
                                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                            <a href="/player_edit/<%=data[i]['id']%>"><i class="zmdi zmdi-edit"></i></a>
+                                                            <a href="/staff_edit/<%=partners[i]['id']%>"><i class="zmdi zmdi-edit"></i></a>
                                                         </button>
                                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                            <a href="/del_player/<%=data[i]['id']%>"><i class="zmdi zmdi-delete"></i></a>
+                                                            <a href="/del_staff/<%=partners[i]['id']%>"><i class="zmdi zmdi-delete"></i></a>
                                                         </button>
                                                     </div>
                                                 </td>

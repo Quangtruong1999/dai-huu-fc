@@ -196,7 +196,6 @@ async function route(app){
         if(typeof req.session.user == 'undefined'){
             res.redirect('/login');
         }else{
-            
             pool.connect(function(err, client, done){
                 if(err){
                     return console.error('error fetching client from pool ', err)
@@ -414,6 +413,41 @@ async function route(app){
         });
     })
     
+    app.get('/partners', async (req, res) => {
+        if(typeof req.session.user == 'undefined'){
+            res.redirect('/login');
+        }else{
+            const partners = await pool.query(`select * from partners`)
+            res.render('partners', {
+                partners: partners.rows,
+                name: req.session.name,
+                email: req.session.email
+            });
+            
+        }
+    })
+
+    app.get('/partners_add', (req, res) => {
+        if(typeof req.session.user == 'undefined'){
+            res.redirect('/login');
+        }else{
+            res.render('partners_add', {
+                name: req.session.name,
+                email: req.session.email
+            })
+        }
+    })
+    app.post('/partners_add', (req, res) => {
+        if(typeof req.session.user == 'undefined'){
+            res.redirect('/login');
+        }else{
+            res.render('partners_add', {
+                name: req.session.name,
+                email: req.session.email
+            })
+        }
+    })
+
     app.get('/staff_add', (req, res) => {
         if(typeof req.session.user == 'undefined'){
             res.redirect('/login');
@@ -437,8 +471,6 @@ async function route(app){
         if(typeof req.session.user == 'undefined'){
             res.redirect('/login');
         }else{
-            console.log('hello mấy cưng = ');
-            console.log('name = ', req.body);
             pool.connect(function(err, client, done){
                 if(err){
                     return console.error('error fetching client from pool ', err)
@@ -449,7 +481,7 @@ async function route(app){
                     if(err){
                         throw err;
                     }
-                    res.render('product_add', {positions: result.rows});
+                    res.render('staff_add', {positions: result.rows});
                 });
             });
         }
@@ -628,8 +660,9 @@ async function route(app){
         res.render('chairman', {partners: partners.rows})
     })
 
-    app.get('/information', (req, res) => {
-        res.render('info_dhfc')
+    app.get('/information', async (req, res) => {
+        const partners = await pool.query(`select * from partners`);
+        res.render('info_dhfc', {partners: partners.rows})
     })
       
     app.get('/aboutus', async (req, res) => {
@@ -672,16 +705,19 @@ async function route(app){
         res.render('blogdetail')
     })
       
-    app.get('/bloggrid', (req, res) => {
-        res.render('bloggrid')
+    app.get('/bloggrid', async (req, res) => {
+        const partners = await pool.query(`select * from partners`);
+        res.render('bloggrid', {partners: partners.rows})
     })
       
-    app.get('/bloglist', (req, res) => {
-        res.render('bloglist')
+    app.get('/bloglist', async (req, res) => {
+        const partners = await pool.query(`select * from partners`);
+        res.render('bloglist', {partners: partners.rows})
     })
       
-    app.get('/buyticket', (req, res) => {
-        res.render('buyticket')
+    app.get('/news', async (req, res) => {
+        const partners = await pool.query(`select * from partners`);
+        res.render('buyticket', {partners: partners.rows})
     })
       
     app.get('/comming-soon', async (req, res) => {

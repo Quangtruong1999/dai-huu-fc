@@ -50,7 +50,7 @@
                     <li>
                         <a href="#">Đội hình</a>
                     </li>
-                    <li><a href="buyticket">Mua vé</a></li>
+                    <li><a href="news">Mua vé</a></li>
                     <li>
                         <a href="matchresult">Trận đấu</a>
                         <ul class="tg-dropdown-menu">
@@ -229,7 +229,7 @@
 													<li><a href="#">Sứ mệnh tầm nhìn</a></li>
 												</ul>
 											</li>
-											<li><a href="buyticket">Tin Tức</a></li>
+											<li><a href="news">Tin Tức</a></li>
 											<li>
 												<a href="matchresult">Trận đấu</a>
 												<ul class="tg-dropdown-menu">
@@ -329,6 +329,18 @@
 						</div>
 					</div>
 				</div>
+			</div>
+			
+			<div class="py-xl-5 py-3 sponsor">  
+				<div class="container">  
+					<div class="level" style="text-align:center">
+						<% for(var i=0; i<partners.length; i++){%>
+						<a href="<%= partners[i]['link_web']%>">  
+							<img width="180px" height="250px" src="<%= partners[i]['img']%>" alt="<%= partners[i]['full_name']%>">  
+						</a>  
+						<%}%>
+					</div>  
+				</div> 
 			</div>
 		</main>
 		<!--************************************

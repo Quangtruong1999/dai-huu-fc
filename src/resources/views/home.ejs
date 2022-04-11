@@ -49,7 +49,7 @@
 								<li><a href="/playerdetail">playergrid detail</a></li>
 							</ul>
 						</li>
-						<li><a href="buyticket">Mua vé</a></li>
+						<li><a href="news">Mua vé</a></li>
 						<li class="menu-item-has-children">
 							<a href="#">Trận đấu</a>
 							<ul class="tg-dropdown-menu">
@@ -216,7 +216,7 @@
 													<li><a href="#">Sứ mệnh tầm nhìn</a></li>
 												</ul>
 											</li>
-											<li><a href="buyticket">Tin Tức</a></li>
+											<li><a href="news">Tin Tức</a></li>
 											<li>
 												<a href="matchresult">Trận đấu</a>
 												<ul class="tg-dropdown-menu">
@@ -1499,7 +1499,7 @@
 			</main>
 			<div class="py-xl-5 py-3 sponsor">  
 				<div class="container">  
-					<div class="level">
+					<div class="level" style="text-align:center">
 						<% for(var i=0; i<data.length; i++){%>
 						<a href="<%= data[i]['link_web']%>">  
 							<img width="180px" height="250px" src="<%= data[i]['img']%>" alt="<%= data[i]['full_name']%>">  
