@@ -242,7 +242,7 @@
                             <strong>Chỉnh sửa nhân sự</strong>
                         </div>
                         <div class="card-body card-block">
-                            <form action="/uploads/staff" method="POST" enctype="multipart/form-data" class="form-horizontal">
+                            <form action="/staff_edit/<%= info_staff[0]['id']%>" method="POST" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="text-input" class=" form-control-label">Tên</label>

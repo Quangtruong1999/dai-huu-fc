@@ -50,6 +50,7 @@ async function route(app){
     })
     
     app.post('/uploads/player', urlencodedParser, upload.single('image'), async (req, res) => {
+        console.log('upload ảnh players ', req.body.image)
         pool.connect(function(err, client, done){
             if(err){
                 return console.error('error fetching client from pool ', err)
@@ -258,17 +259,18 @@ async function route(app){
 
     
     app.post('/uploads/staff', urlencodedParser, upload.single('image'), async (req, res) => {
-        console.log('imageeee = ', req.body.images);
+        console.log('position ảnh staff ', req.body.position)
         pool.connect(function(err, client, done){
             if(err){
                 return console.error('error fetching client from pool ', err)
             }
             client.query('SELECT * FROM position where position.id in (select staff.position_id from staff)', async (err, result) => {
-                // done();
+                done();
             
                 if(err){
-                    res.end();
-                    return console.error('error running query ', err)
+                    throw err;
+                    // res.end();
+                    // return console.error('error running query ', err)
                 }
                 for (var i=0; i<result.rows.length; i++){
                     if(req.body.position == result.rows[i]['id']){
@@ -763,9 +765,152 @@ async function route(app){
         if(typeof req.session.user == 'undefined'){
             res.redirect('/login');
         }else{
-            const info_player = await pool.query(`select * from staff where id = $1`, [req.params.id])
-            console.log('player = ', info_player)
-            res.render('staff_edit')
+            const positions = await client.query('SELECT * FROM position where position.id in (select staff.position_id from staff)')
+            for (var i=0; i<positions.rows.length; i++){
+                if(req.body.position == positions.rows[i]['id']){
+                    if(positions.rows[i]['name'].toLowerCase() == 'hlv trưởng'){
+                        const imagePath = path.join(__dirname, '../public/images/player/Head coach/');
+                        const fileUpload = new Resize(imagePath);
+                        if (!req.file) {
+                            pool.query(`update staff 
+                            set full_name=$1, nationality=$2, current_team=$3, position_id=$4
+                            where id=$5;`,
+                            [req.body.full_name, 'Việt Nam', 14, req.body.position, req.params.id], (err, result)=>{
+                                if(err){
+                                    throw err;
+                                }
+                                console.log('Cập nhật thành công')
+                                res.redirect('/staff');
+                            });
+                        }else{
+                            const filename = await fileUpload.save(req.file.buffer);
+                            pool.query(`update staff 
+                            set full_name=$1, nationality=$2, current_team=$3, position_id=$4, images=$5
+                            where id=$6;`,
+                            [req.body.full_name, 'Việt Nam', 14, req.body.position, 'images/player/Head coach/'+filename, req.params.id], (err, result)=>{
+                                if(err){
+                                    throw err;
+                                }
+                                console.log('Thêm thành công')
+                                res.redirect('/staff');
+                            });
+                        }
+                        
+                    }else if(positions.rows[i]['name'].toLowerCase() == 'trợ lý hlv'){
+                        const imagePath = path.join(__dirname, '../public/images/player/Assistant coach/');
+                        const fileUpload = new Resize(imagePath);
+                        if (!req.file) {
+                            pool.query(`update staff 
+                            set full_name=$1, nationality=$2, current_team=$3, position_id=$4
+                            where id=$5;`,
+                            [req.body.full_name, 'Việt Nam', 14, req.body.position, req.params.id], (err, result)=>{
+                                if(err){
+                                    throw err;
+                                }
+                                console.log('Cập nhật thành công')
+                                res.redirect('/staff');
+                            });
+                        }else{
+                            const filename = await fileUpload.save(req.file.buffer);
+                            pool.query(`update staff 
+                            set full_name=$1, nationality=$2, current_team=$3, position_id=$4, images=$5
+                            where id=$6;`,
+                            [req.body.full_name, 'Việt Nam', 14, req.body.position, 'images/player/Assistant coach/'+filename, req.params.id], (err, result)=>{
+                                if(err){
+                                    throw err;
+                                }
+                                console.log('Thêm thành công')
+                                res.redirect('/staff');
+                            });
+                        }
+                        
+                    }else if(positions.rows[i]['name'].toLowerCase() == 'chuyên viên y tế'){
+                        const imagePath = path.join(__dirname, '../public/images/player/Medical specialist/');
+                        const fileUpload = new Resize(imagePath);
+                        if (!req.file) {
+                            pool.query(`update staff 
+                            set full_name=$1, nationality=$2, current_team=$3, position_id=$4
+                            where id=$5;`,
+                            [req.body.full_name, 'Việt Nam', 14, req.body.position, req.params.id], (err, result)=>{
+                                if(err){
+                                    throw err;
+                                }
+                                console.log('Cập nhật thành công')
+                                res.redirect('/staff');
+                            });
+                        }else{
+                            const filename = await fileUpload.save(req.file.buffer);
+                            pool.query(`update staff 
+                            set full_name=$1, nationality=$2, current_team=$3, position_id=$4, images=$5
+                            where id=$6;`,
+                            [req.body.full_name, 'Việt Nam', 14, req.body.position, 'images/player/Medical specialist/'+filename, req.params.id], (err, result)=>{
+                                    if(err){
+                                        throw err;
+                                    }
+                                    console.log('Thêm thành công')
+                                    res.redirect('/staff');
+                            });
+                        }
+                        
+                    }else if(positions.rows[i]['name'].toLowerCase() == 'chuyên viên vật lý trị liệu'){
+                        const imagePath = path.join(__dirname, '../public/images/player/Physiotherapist/');
+                        const fileUpload = new Resize(imagePath);
+                        if (!req.file) {
+                            pool.query(`update staff 
+                            set full_name=$1, nationality=$2, current_team=$3, position_id=$4
+                            where id=$5;`,
+                            [req.body.full_name, 'Việt Nam', 14, req.body.position, req.params.id], (err, result)=>{
+                                if(err){
+                                    throw err;
+                                }
+                                console.log('Cập nhật thành công')
+                                res.redirect('/staff');
+                            });
+                        }else{
+                            const filename = await fileUpload.save(req.file.buffer);
+                            pool.query(`update staff 
+                            set full_name=$1, nationality=$2, current_team=$3, position_id=$4, images=$5
+                            where id=$6;`,
+                            [req.body.full_name, 'Việt Nam', 14, req.body.position, 'images/player/Physiotherapist/'+filename, req.params.id], (err, result)=>{
+                                if(err){
+                                    throw err;
+                                }
+                                console.log('Thêm thành công')
+                                res.redirect('/staff');
+                            });
+                        }
+                        
+                    }else if(positions.rows[i]['name'].toLowerCase() == 'cán bộ hậu cần'){
+                        const imagePath = path.join(__dirname, '../public/images/player/Cadres logistics/');
+                        const fileUpload = new Resize(imagePath);
+                        if (!req.file) {
+                            pool.query(`update staff 
+                            set full_name=$1, nationality=$2, current_team=$3, position_id=$4
+                            where id=$5;`,
+                            [req.body.full_name, 'Việt Nam', 14, req.body.position, req.params.id], (err, result)=>{
+                                if(err){
+                                    throw err;
+                                }
+                                console.log('Cập nhật thành công')
+                                res.redirect('/staff');
+                            });
+                        }else{
+                            const filename = await fileUpload.save(req.file.buffer);
+                            pool.query(`update staff 
+                            set full_name=$1, nationality=$2, current_team=$3, position_id=$4, images=$5
+                            where id=$6;`,
+                            [req.body.full_name, 'Việt Nam', 14, req.body.position, 'images/player/Cadres logistics/'+filename, req.params.id], (err, result)=>{
+                                if(err){
+                                    throw err;
+                                }
+                                console.log('Cập nhật thành công')
+                                res.redirect('/staff');
+                            });
+                        }
+                        
+                    }
+                }
+            }    
         }
     })
 
