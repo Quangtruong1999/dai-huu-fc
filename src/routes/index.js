@@ -479,12 +479,14 @@ async function route(app){
         if(typeof req.session.user == 'undefined'){
             res.redirect('/login');
         }else{
-            const info_player = await pool.query(`select * from staff where id = $1`, [req.params.id])
-            const positions = await pool.query(`select * from position`)
-            console.log('player = ', info_player.rows)
+            const info_staff = await pool.query(`select * from staff where id = $1`, [req.params.id])
+            const positions = await pool.query(`select distinct position.id, position.name
+            from position, staff
+            where position.id = staff.position_id`)
+            console.log('staff = ', info_staff.rows)
             console.log('position = ', positions.rows)
             res.render('staff_edit',{
-                info_player:info_player.rows,
+                info_staff:info_staff.rows,
                 name: req.session.name,
                 email: req.session.email,
                 position: positions.rows
