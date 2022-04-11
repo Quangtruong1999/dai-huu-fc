@@ -115,6 +115,32 @@ CREATE TABLE IF NOT EXISTS users(
     CONSTRAINT A_USER_PK PRIMARY KEY (ID)
 );
 
+--Create a media_pictures
+CREATE TABLE IF NOT EXISTS media_pictures(
+    ID SERIAL,
+    title VARCHAR(255),
+    img VARCHAR(255),
+    CONSTRAINT A_MEDIA_PICTURES_PK PRIMARY KEY (ID)
+);
+
+--Create a media_videos
+CREATE TABLE IF NOT EXISTS media_videos(
+    ID SERIAL,
+    title VARCHAR(255),
+    link VARCHAR(255),
+    CONSTRAINT A_MEDIA_VIDEOS_PK PRIMARY KEY (ID)
+);
+
+-- CREATE TABLE IF NOT EXISTS news(
+--     ID SERIAL,
+--     title TEXT,
+--     team_one_id INT,
+--     score_one INT,
+--     team_second_id INT,
+--     score_second INT,
+--     CONSTRAINT A_MATCHRESULT_PK PRIMARY KEY (ID)
+-- );
+
 -- ALTER TABLE manager ADD CONSTRAINT FK_MANAGER_POSITION FOREIGN KEY (position_id) REFERENCES position (ID);
 -- ALTER TABLE manager ADD CONSTRAINT FK_MANAGER_TEAM FOREIGN KEY (current_team) REFERENCES team (ID);
 -- ALTER TABLE team ADD CONSTRAINT FK_TEAM_MANAGER FOREIGN KEY (manager_id) REFERENCES manager (ID);

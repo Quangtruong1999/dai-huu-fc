@@ -8,38 +8,38 @@
         <meta name="keywords" content="au theme template">
 
         <!-- Title Page-->
-        <title>Đại Hữu FC - Thêm nhân sự</title>
+        <title>Đại Hữu FC - Chỉnh sửa đối tác</title>
 
         <!-- Fontfaces CSS-->
-        <link href="css/font-face.css" rel="stylesheet" media="all">
-        <link href="vendor/font-awesome-4.7/css/font-awesome.min.css"
+        <link href="/css/font-face.css" rel="stylesheet" media="all">
+        <link href="/vendor/font-awesome-4.7/css/font-awesome.min.css"
             rel="stylesheet" media="all">
-        <link href="vendor/font-awesome-5/css/fontawesome-all.min.css"
+        <link href="/vendor/font-awesome-5/css/fontawesome-all.min.css"
             rel="stylesheet" media="all">
-        <link href="vendor/mdi-font/css/material-design-iconic-font.min.css"
+        <link href="/vendor/mdi-font/css/material-design-iconic-font.min.css"
             rel="stylesheet" media="all">
 
         <!-- Bootstrap CSS-->
-        <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet"
+        <link href="/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet"
             media="all">
 
         <!-- Vendor CSS-->
-        <link href="vendor/animsition/animsition.min.css" rel="stylesheet"
+        <link href="/vendor/animsition/animsition.min.css" rel="stylesheet"
             media="all">
         <link
-            href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
+            href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
             rel="stylesheet" media="all">
-        <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
-        <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet"
+        <link href="/vendor/wow/animate.css" rel="stylesheet" media="all">
+        <link href="/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet"
             media="all">
-        <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
-        <link href="vendor/select2/select2.min.css" rel="stylesheet"
+        <link href="/vendor/slick/slick.css" rel="stylesheet" media="all">
+        <link href="/vendor/select2/select2.min.css" rel="stylesheet"
             media="all">
-        <link href="vendor/perfect-scrollbar/perfect-scrollbar.css"
+        <link href="/vendor/perfect-scrollbar/perfect-scrollbar.css"
             rel="stylesheet" media="all">
 
         <!-- Main CSS-->
-        <link href="css/theme.css" rel="stylesheet" media="all">
+        <link href="/css/theme.css" rel="stylesheet" media="all">
 
     </head>
     <div class="page-wrapper">
@@ -49,7 +49,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="/">
-                            <img src="images/icon/logo.png" alt="CoolAdmin"
+                            <img src="/images/icon/logo.png" alt="CoolAdmin"
                                 />
                         </a>
                         <button class="hamburger hamburger--slider"
@@ -82,7 +82,7 @@
                             <i class="fas fa-address-book"></i>Quản lý người dùng</a>
                         </li>
                         <li>
-                            <a href="/customer_dashboard">
+                            <a href="/partners">
                             <i class="fas fa-address-book"></i>Quản lý đối tác</a>
                         </li>
                         <li>
@@ -107,7 +107,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin" />
+                    <img src="/images/icon/logo.png" alt="Cool Admin" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -175,11 +175,11 @@
                                         js-item-menu">
                                         <div class="image">
                                             <img
-                                                src="images/icon/avatar-01.jpg"
+                                                src="/images/icon/avatar-01.jpg"
                                                 alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#"><%=user_name%></a>
+                                            <a class="js-acc-btn" href="#"><%=name%></a>
                                         </div>
                                         <div class="account-dropdown
                                             js-dropdown">
@@ -187,16 +187,16 @@
                                                 <div class="image">
                                                     <a href="#">
                                                         <img
-                                                            src="images/icon/avatar-01.jpg"
+                                                            src="/images/icon/avatar-01.jpg"
                                                             alt="John Doe"
                                                             />
                                                     </a>
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#"><%=user_name%></a>
+                                                        <a href="#"><%=name%></a>
                                                     </h5>
-                                                    <span class="email"><%=user_email%></span>
+                                                    <span class="email"><%=email%></span>
                                                 </div>
                                             </div>
                                             <div
@@ -237,34 +237,43 @@
                 <div class="col-lg-6 mx-auto">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Thêm nhân sự</strong>
+                            <strong>Chỉnh sửa đối tác </strong>
                         </div>
                         <div class="card-body card-block">
-                            <form action="/uploads/staff" method="POST" enctype="multipart/form-data" class="form-horizontal">
+                            <form action="/partners_edit/<%=partner[0]['id']%>" method="POST" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="text-input" class=" form-control-label">Tên</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="full_name" placeholder="Tên nhân sự" class="form-control" required>
+                                        <input type="text" id="text-input" name="full_name" value="<%= partner[0]['full_name']%>" placeholder="Tên đối tác" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3">
-                                        <label for="select" class=" form-control-label">Vị trí</label>
+                                        <label for="text-input" class=" form-control-label">Website</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <select name="position" id="select" class="form-control" required>
-                                            <% for(var i=0; i<positions.length;i++){%>
-                                                <option value="<%=positions[i]['players.id']%>"><%=positions[i]['name']%></option>
-                                            <%}%>
-                                        </select>
+                                        <input type="text" id="text-input" name="link_web" value="<%= partner[0]['link_web']%>" placeholder="Link Website" class="form-control">
                                     </div>
                                 </div>
-                                
                                 <div class="row form-group">
                                     <div class="col col-md-3">
-                                        <label for="image" class=" form-control-label">Hình ảnh</label>
+                                        <label for="image_player" class="form-control-label">Ảnh</label>
+                                    </div>
+                                    <%if(partner[0]['img'] == ''){%>
+                                        <div class="col-12 col-md-9">
+                                            <img id="image_player" width="200px" src="/images/white.jpg" alt=""/>
+                                        </div>
+                                    <%}else{%>
+                                        <div class="col-12 col-md-9">
+                                            <img id="image_player" src="/<%=partner[0]['img']%>" alt="<%=partner[0]['img']%>"/>
+                                        </div>
+                                    <%}%>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="image" class=" form-control-label"></label>
                                     </div>
                                     <div class="col-12 col-md-9">
                                         <input type="file" name="image" class="input-group input-file"/>
@@ -306,27 +315,27 @@
     </script>
 
     <!-- Jquery JS-->
-    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <script src="/vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
-    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <script src="/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="/vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!-- Vendor JS       -->
-    <script src="vendor/slick/slick.min.js">
+    <script src="/vendor/slick/slick.min.js">
 </script>
-    <script src="vendor/wow/wow.min.js"></script>
-    <script src="vendor/animsition/animsition.min.js"></script>
-    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    <script src="/vendor/wow/wow.min.js"></script>
+    <script src="/vendor/animsition/animsition.min.js"></script>
+    <script src="/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
 </script>
-    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="vendor/counter-up/jquery.counterup.min.js">
+    <script src="/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="/vendor/counter-up/jquery.counterup.min.js">
 </script>
-    <script src="vendor/circle-progress/circle-progress.min.js"></script>
-    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="vendor/select2/select2.min.js">
+    <script src="/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="/vendor/select2/select2.min.js">
 </script>
 
         <!-- Main JS-->
-        <script src="js/main copy.js"></script>
+        <script src="/js/main copy.js"></script>
     </body>
 </html>
