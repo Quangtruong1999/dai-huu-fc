@@ -14,7 +14,7 @@ const pool = new Pool({
 class TeamController{
 
     index(req, res){
-        
+
         pool.connect(function(err, client, done){
             if(err){
                 return console.error('error fetching client from pool ', err)
@@ -28,19 +28,16 @@ class TeamController{
                     res.end()
                     return console.error('error running query ', err)
                 }
-                player = result.rows
-                data['staff'] = result.rows
-                console.log('staff trong = ', player)
-                console.log('data strong = ', data)
+                // data['staff'] = result.rows
                 
                 res.render('playergrid-v1', {players: result.rows})
                 // res.render('shop11', {data: product_list})
             });
                 
-            const data = {}
-            let player
         });
     }
+
+    
 }
 
 

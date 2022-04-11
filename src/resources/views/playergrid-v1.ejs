@@ -244,6 +244,10 @@
 										<ul>
 											<li>
 												<a href="team">Đội hình</a>
+												<ul class="tg-dropdown-menu">
+													<li><a href="team">Cầu thủ</a></li>
+													<li><a href="info_staff">Huấn luyện viên</a></li>
+												</ul>
 											</li>
 											<li>
 												<a href="soccermedia-1">Media</a>
@@ -488,6 +492,62 @@
 					Ban huấn luyện End
 			*************************************-->
 			<!--************************************
+					Ban huấn luyện Start
+			*************************************-->
+			<!-- <%=players%> -->
+			
+			<!-- <section class="tg-main-section tg-haslayout">
+				<div class="container">
+					<div class="tg-section-name">
+						<h2>Ban huấn luyện</h2>
+					</div>
+					<div class="col-sm-11 col-xs-11 pull-right">
+						<div class="row">
+							<div class="tg-topratedplayer tg-haslayout">
+								<div class="row">
+									<div class="col-md-7 col-sm-12 col-xs-12">
+										<div id="tg-playerscrollbar" class="tg-players tg-playerscrollbar">
+											<% for(var i=0; i<players.length; i++){%>
+												<% if(players[i]['position_id'] == 1){ %>
+													<div class="tg-player">
+														<div class="col-sm-6 col-xs-6 pull-right">
+															<div class="tg-playcontent">
+																<a class="tg-theme-tag" href="#">Thủ môn</a>
+																<h3><a href="#"><%=players[i]['full_name']%></a></h3>
+																<div class="tg-description">
+																	<p>Số áo: <span><%=players[i]['number_position']%></span></p>
+																	<p>Chiều cao: <span><%=players[i]['heights']%>cm</span></p>
+																	<p>Cân nặng: <span><%=players[i]['weights']%>kg</span></p>
+																</div>
+															</div>
+														</div>
+														<div class="col-sm-6 col-xs-6">
+															<figure>
+																<a href="#">
+																	<%if(players[i]['images'] == ''){%>
+																		<img src="images/half_body.png">
+																	<%}%>
+																	<%if(players[i]['images'] != ''){%>
+																		<img src="<%=players[i]['images']%>"/>
+																	<%}%>
+																</a>
+															</figure>
+														</div>
+													</div>
+												<%}%>
+											<%}%>	
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section> -->
+			<!--************************************
+					Ban huấn luyện End
+			*************************************-->
+			<!--************************************
 					Thủ môn Start
 			*************************************-->
 			<!-- <%=players%> -->
@@ -712,6 +772,17 @@
 					Tiền đạo End
 			*************************************-->
 			
+			<div class="py-xl-5 py-3 sponsor">  
+				<div class="container">  
+					<div class="level">
+						<% for(var i=0; i<partners.length; i++){%>
+						<a href="<%= partners[i]['link_web']%>">  
+							<img width="180px" height="250px" src="<%= partners[i]['img']%>" alt="<%= partners[i]['full_name']%>">  
+						</a>  
+						<%}%>
+					</div>  
+				</div> 
+			</div>
 		</main>
 		<!--************************************
 				Main End

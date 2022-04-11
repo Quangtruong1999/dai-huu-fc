@@ -229,6 +229,10 @@
 										<ul>
 											<li>
 												<a href="team">Đội hình</a>
+												<ul class="tg-dropdown-menu">
+													<li><a href="team">Cầu thủ</a></li>
+													<li><a href="info_staff">Huấn luyện viên</a></li>
+												</ul>
 											</li>
 											<li>
 												<a href="soccermedia-1">Media</a>
@@ -275,7 +279,10 @@
 								<div class="tg-slider-content">
 									<h1>alive and <span>kickin</span></h1>
 									<div class="tg-btnbox">
+<<<<<<< HEAD
 										<!-- <h2>from june 27</h2> -->
+=======
+>>>>>>> origin/stagging
 										<!-- <a class="tg-btn" href="#"><span>read more</span></a> -->
 										<!-- <a class="tg-btn" href="#"><span>book my ticket</span></a> -->
 									</div>
@@ -1481,6 +1488,17 @@
 						Blog End
 				*************************************-->
 			</main>
+			<div class="py-xl-5 py-3 sponsor">  
+				<div class="container">  
+					<div class="level">
+						<% for(var i=0; i<data.length; i++){%>
+						<a href="<%= data[i]['link_web']%>">  
+							<img width="180px" height="250px" src="<%= data[i]['img']%>" alt="<%= data[i]['full_name']%>">  
+						</a>  
+						<%}%>
+					</div>  
+				</div> 
+			</div>
 			<!--************************************
 					Main End
 			*************************************-->
