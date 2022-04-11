@@ -10,6 +10,7 @@ const flash = require('express-flash');
 const { render } = require('express/lib/response');
 const upload = require('./uploadMiddleware');
 const Resize = require('./Resize');
+const non_resize = require('./non_resize');
 const bodyParser = require('body-parser');
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -196,7 +197,6 @@ async function route(app){
         if(typeof req.session.user == 'undefined'){
             res.redirect('/login');
         }else{
-            
             pool.connect(function(err, client, done){
                 if(err){
                     return console.error('error fetching client from pool ', err)
@@ -413,7 +413,270 @@ async function route(app){
             });
         });
     })
+    // route media start
+    app.get('/pictures', async (req, res) => {
+        const pictures = await pool.query(`select * from media_pictures`)
+        const partners = await pool.query(`select * from partners`)
+        res.render('media_pictures', {
+            pictures: pictures.rows,
+            partners: partners.rows,
+            name: req.session.name,
+            email: req.session.email
+        });    
+    })
+    app.get('/videos', async (req, res) => {
+        const videos = await pool.query(`select * from media_videos`)
+        const partners = await pool.query(`select * from partners`)
+        res.render('media_videos', {
+            videos: videos.rows,
+            partners: partners.rows,
+            name: req.session.name,
+            email: req.session.email
+        });      
+    })
+    app.get('/management_pictures', async (req, res) => {
+        if(typeof req.session.user == 'undefined'){
+            res.redirect('/login');
+        }else{
+            const pictures = await pool.query(`select * from media_pictures`)
+            res.render('management_pictures', {
+                pictures: pictures.rows,
+                name: req.session.name,
+                email: req.session.email
+            });
+            
+        }
+    })
+
+    app.get('/pictures_add', async (req, res) => {
+        if(typeof req.session.user == 'undefined'){
+            res.redirect('/login');
+        }else{
+            const pictures = await pool.query(`select * from media_pictures`)
+            res.render('management_pictures_add', {
+                pictures: pictures.rows,
+                name: req.session.name,
+                email: req.session.email
+            });
+            
+        }
+    })
     
+    app.post('/pictures_add', urlencodedParser, upload.single('image'), async (req, res) => {
+        if(typeof req.session.user == 'undefined'){
+            res.redirect('/login');
+        }else{
+
+            const imagePath = path.join(__dirname, '../public/images/media/pictures');
+            const fileUpload = new non_resize(imagePath);
+            if (!req.file) {
+                // res.status(401).json({error: 'Please provide an image'});
+                pool.query(`INSERT INTO media_pictures (title, years, img)
+                VALUES ($1,$2,$3);`,
+                [req.body.title, req.body.years, ''], (err, result)=>{
+                    if(err){ throw err; }
+                    console.log('Thêm thành công')
+                    res.redirect('/management_pictures');
+                });
+            }else{
+                const filename = await fileUpload.save(req.file.buffer);
+                pool.query(`INSERT INTO media_pictures (title, years, img)
+                VALUES ($1,$2,$3);`,
+                [req.body.title, req.body.years, 'images/media/pictures/'+filename], (err, result)=>{
+                    if(err){ throw err; }
+                        console.log('Thêm thành công')
+                        res.redirect('/management_pictures');
+                });
+            }
+        }
+    })
+    
+    app.get('/pictures_edit/:id', async (req, res) => {
+        if(typeof req.session.user == 'undefined'){
+            res.redirect('/login');
+        }else{
+            const picture = await pool.query(`select * from media_pictures where id = $1`, [req.params.id])
+            res.render('management_pictures_edit', {
+                picture: picture.rows,
+                name: req.session.name,
+                email: req.session.email
+            })
+        }
+    })
+    app.post('/pictures_edit/:id', urlencodedParser, upload.single('image'), async (req, res) => {
+        if(typeof req.session.user == 'undefined'){
+            res.redirect('/login');
+        }else{
+            const imagePath = path.join(__dirname, '../public/images/media/pictures');
+            const fileUpload = new Resize(imagePath);
+            if (!req.file) {
+                // res.status(401).json({error: 'Please provide an image'});
+                pool.query(`update media_pictures 
+                set title=$1, years=$2
+                where id=$3;`,
+                [req.body.title, req.body.years, req.params.id], (err, result)=>{
+                    if(err){ throw err; }
+                    console.log('Cập nhật thành công')
+                    res.redirect('/management_pictures');
+                });
+            }else{
+                const filename = await fileUpload.save(req.file.buffer);
+                pool.query(`update partners 
+                set title=$1, link_web=$2, img=$3 
+                where id=$4;`,
+                [req.body.full_name, req.body.link_web, 'images/media/pictures/'+filename, req.params.id], (err, result)=>{
+                    if(err){ throw err; }
+                        console.log('Cập nhật thành công')
+                        res.redirect('/management_pictures');
+                });
+            }
+        }
+    })
+    
+    app.get('/pictures_del/:id', (req, res) => {
+        pool.connect(function(err, client, done){
+            if(err){
+                throw err;
+            }
+            client.query(`DELETE FROM media_pictures WHERE id = $1`,[req.params.id], (err, result)=>{
+                if (err){
+                    throw err;
+                }
+                console.log('xóa thành công');
+                res.redirect('/management_pictures');
+            })
+        })
+        
+    })
+         
+    // app.get('/management_videos', async (req, res) => {
+    //     if(typeof req.session.user == 'undefined'){
+    //         res.redirect('/login');
+    //     }else{
+    //         const videos = await pool.query(`select * from media_videos`)
+    //         const partners = await pool.query(`select * from partners`)
+    //         res.render('media_videos', {
+    //             videos: videos.rows,
+    //             partners: partners.rows,
+    //             name: req.session.name,
+    //             email: req.session.email
+    //         });
+            
+    //     }
+    // })
+    // route media end
+
+    // route partners start
+    app.get('/partners', async (req, res) => {
+        if(typeof req.session.user == 'undefined'){
+            res.redirect('/login');
+        }else{
+            const partners = await pool.query(`select * from partners`)
+            res.render('partners', {
+                partners: partners.rows,
+                name: req.session.name,
+                email: req.session.email
+            });
+            
+        }
+    })
+
+    app.get('/partners_add', (req, res) => {
+        if(typeof req.session.user == 'undefined'){
+            res.redirect('/login');
+        }else{
+            res.render('partners_add', {
+                name: req.session.name,
+                email: req.session.email
+            })
+        }
+    })
+    app.post('/partners_add', urlencodedParser, upload.single('image'), async (req, res) => {
+        if(typeof req.session.user == 'undefined'){
+            res.redirect('/login');
+        }else{
+            const imagePath = path.join(__dirname, '../public/images/partners');
+            const fileUpload = new Resize(imagePath);
+            if (!req.file) {
+                // res.status(401).json({error: 'Please provide an image'});
+                pool.query(`INSERT INTO partners (full_name, link_web, img)
+                VALUES ($1,$2,$3);`,
+                [req.body.full_name, req.body.link_web, ''], (err, result)=>{
+                    if(err){ throw err; }
+                    console.log('Thêm thành công')
+                    res.redirect('/partners');
+                });
+            }else{
+                const filename = await fileUpload.save(req.file.buffer);
+                pool.query(`INSERT INTO partners (full_name, link_web, img)
+                VALUES ($1,$2,$3);`,
+                [req.body.full_name, req.body.link_web, 'images/partners/'+filename], (err, result)=>{
+                    if(err){ throw err; }
+                        console.log('Thêm thành công')
+                        res.redirect('/partners');
+                    });
+            }
+        }
+    })
+
+    app.get('/partners_edit/:id', async (req, res) => {
+        if(typeof req.session.user == 'undefined'){
+            res.redirect('/login');
+        }else{
+            const partner = await pool.query(`select * from partners where id = $1`, [req.params.id])
+            res.render('partners_edit', {
+                partner: partner.rows,
+                name: req.session.name,
+                email: req.session.email
+            })
+        }
+    })
+    app.post('/partners_edit/:id', urlencodedParser, upload.single('image'), async (req, res) => {
+        if(typeof req.session.user == 'undefined'){
+            res.redirect('/login');
+        }else{
+            const imagePath = path.join(__dirname, '../public/images/partners');
+            const fileUpload = new Resize(imagePath);
+            if (!req.file) {
+                // res.status(401).json({error: 'Please provide an image'});
+                pool.query(`update partners 
+                set full_name=$1, link_web=$2
+                where id=$4;`,
+                [req.body.full_name, req.body.link_web, req.params.id], (err, result)=>{
+                    if(err){ throw err; }
+                    console.log('Cập nhật thành công')
+                    res.redirect('/partners');
+                });
+            }else{
+                const filename = await fileUpload.save(req.file.buffer);
+                pool.query(`update partners 
+                set full_name=$1, link_web=$2, img=$3 
+                where id=$4;`,
+                [req.body.full_name, req.body.link_web, 'images/partners/'+filename, req.params.id], (err, result)=>{
+                    if(err){ throw err; }
+                        console.log('Cập nhật thành công')
+                        res.redirect('/partners');
+                });
+            }
+        }
+    })
+    
+    app.get('/partners_del/:id', (req, res) => {
+        pool.connect(function(err, client, done){
+            if(err){
+                throw err;
+            }
+            client.query(`DELETE FROM partners WHERE id = $1`,[req.params.id], (err, result)=>{
+                if (err){
+                    throw err;
+                }
+                console.log('xóa thành công');
+                res.redirect('/partners');
+            })
+        })
+        
+    })
+    // route partners end
     app.get('/staff_add', (req, res) => {
         if(typeof req.session.user == 'undefined'){
             res.redirect('/login');
@@ -437,8 +700,6 @@ async function route(app){
         if(typeof req.session.user == 'undefined'){
             res.redirect('/login');
         }else{
-            console.log('hello mấy cưng = ');
-            console.log('name = ', req.body);
             pool.connect(function(err, client, done){
                 if(err){
                     return console.error('error fetching client from pool ', err)
@@ -449,7 +710,7 @@ async function route(app){
                     if(err){
                         throw err;
                     }
-                    res.render('product_add', {positions: result.rows});
+                    res.render('staff_add', {positions: result.rows});
                 });
             });
         }
@@ -628,8 +889,9 @@ async function route(app){
         res.render('chairman', {partners: partners.rows})
     })
 
-    app.get('/information', (req, res) => {
-        res.render('info_dhfc')
+    app.get('/information', async (req, res) => {
+        const partners = await pool.query(`select * from partners`);
+        res.render('info_dhfc', {partners: partners.rows})
     })
       
     app.get('/aboutus', async (req, res) => {
@@ -672,16 +934,19 @@ async function route(app){
         res.render('blogdetail')
     })
       
-    app.get('/bloggrid', (req, res) => {
-        res.render('bloggrid')
+    app.get('/bloggrid', async (req, res) => {
+        const partners = await pool.query(`select * from partners`);
+        res.render('bloggrid', {partners: partners.rows})
     })
       
-    app.get('/bloglist', (req, res) => {
-        res.render('bloglist')
+    app.get('/bloglist', async (req, res) => {
+        const partners = await pool.query(`select * from partners`);
+        res.render('bloglist', {partners: partners.rows})
     })
       
-    app.get('/buyticket', (req, res) => {
-        res.render('buyticket')
+    app.get('/news', async (req, res) => {
+        const partners = await pool.query(`select * from partners`);
+        res.render('buyticket', {partners: partners.rows})
     })
       
     app.get('/comming-soon', async (req, res) => {

@@ -8,7 +8,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="icon" href="images/icon.ico" type="image/icon-ximage">
-	<title>Đại Hữu FC</title>
+	<title>Đại Hữu FC - Tin tức</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -55,7 +55,7 @@
                             <li><a href="playerdetail">playergrid detail</a></li>
                         </ul>
                     </li>
-                    <li class="active"><a href="buyticket">Buy Tickets</a></li>
+                    <li class="active"><a href="news">Buy Tickets</a></li>
                     <li>
                         <a href="#">Match Results</a>
                         <ul class="tg-dropdown-menu">
@@ -230,7 +230,7 @@
 													<li><a href="#">Sứ mệnh tầm nhìn</a></li>
 												</ul>
 											</li>
-											<li><a href="buyticket">Tin Tức</a></li>
+											<li><a href="news">Tin Tức</a></li>
 											<li>
 												<a href="matchresult">Trận đấu</a>
 												<ul class="tg-dropdown-menu">
@@ -288,11 +288,11 @@
 				<div class="row">
 					<div class="tg-banner-content tg-haslayout">
 						<div class="tg-pagetitle">
-							<h1>buy tickets</h1>
+							<h1>Tin tức</h1>
 						</div>
 						<ol class="tg-breadcrumb">
-							<li><a href="#">Home</a></li>
-							<li class="active">buy tickets</li>
+							<li><a href="#">Đại Hữu FC</a></li>
+							<li class="active">Tin tức</li>
 						</ol>
 					</div>
 				</div>
@@ -308,7 +308,7 @@
 			<section class="tg-main-section tg-haslayout">
 				<div class="container">
 					<div class="tg-section-name">
-						<h2>buy Tickets</h2>
+						<h2>Tin tức</h2>
 					</div>
 					<div class="col-sm-11 col-xs-11 pull-right">
 						<div class="row">
@@ -438,6 +438,18 @@
 					</div>
 				</div>
 			</section>
+			
+			<div class="py-xl-5 py-3 sponsor">  
+				<div class="container">  
+					<div class="level" style="text-align:center">
+						<% for(var i=0; i<partners.length; i++){%>
+						<a href="<%= partners[i]['link_web']%>">  
+							<img width="180px" height="250px" src="<%= partners[i]['img']%>" alt="<%= partners[i]['full_name']%>">  
+						</a>  
+						<%}%>
+					</div>  
+				</div> 
+			</div>
 		</main>
 		<!--************************************
 				Main End
