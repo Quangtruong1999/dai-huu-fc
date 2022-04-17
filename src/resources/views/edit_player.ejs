@@ -91,10 +91,24 @@
                             <a href="/customer_dashboard">
                             <i class="fas fa-newspaper"></i>Quản lý tin tức</a>
                         </li>
-                        <li>
-                            <a href="/customer_dashboard">
-                            <i class="fas fa-newspaper"></i>Quản lý media</a>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-chart-bar"></i>
+                                Quản lý media
+                            </a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="/management_videos">Cồng đồng</a>
+                                </li>
+                                <li>
+                                    <a href="/management_pictures">Hình ảnh</a>
+                                </li>
+                                <li>
+                                    <a href="/management_videos">Videos</a>
+                                </li>
+                            </ul>
                         </li>
+                        
                         <li>
                             <a href="/customer_dashboard">
                             <i class="fas fa-briefcase"></i>Quản lý tuyển dụng</a>
@@ -140,9 +154,22 @@
                             <a href="/customer_dashboard">
                             <i class="fas fa-newspaper"></i>Quản lý tin tức</a>
                         </li>
-                        <li>
-                            <a href="/customer_dashboard">
-                            <i class="fas fa-newspaper"></i>Quản lý media</a>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-chart-bar"></i>
+                                Quản lý media
+                            </a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="/management_videos">Cồng đồng</a>
+                                </li>
+                                <li>
+                                    <a href="/management_pictures">Hình ảnh</a>
+                                </li>
+                                <li>
+                                    <a href="/management_videos">Videos</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="/customer_dashboard">
@@ -258,7 +285,7 @@
                                     <div class="col-12 col-md-9">
                                         <select name="position" id="select" class="form-control" required>
                                             <% for(var i=0; i<position.length;i++){%>
-                                                <%if(position[i]['id'] == info_player[0]['number_position']){%>
+                                                <%if(position[i]['id'] == info_player[0]['position_id']){%>
                                                     <p>có r</p>
                                                     <option value="<%=position[i]['id']%>" selected><%=position[i]['name']%></option>
                                                 <%}else{%>
@@ -273,7 +300,7 @@
                                         <label for="textarea-input" class=" form-control-label">Sinh nhật</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input id="datefield" name="birthday" type="date" value="<%=info_player[0]['birthday']%>" min="1899-01-01" max='2022-04-04' required/>
+                                        <input id="datefield" name="birthday" type="date" value="<%=birthday%>" min="1899-01-01" max='2022-04-04' required/>
                                     </div>
                                 </div>
                                 <div class="row form-group">

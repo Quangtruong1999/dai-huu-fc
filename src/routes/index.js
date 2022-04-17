@@ -919,25 +919,114 @@ async function route(app){
             res.redirect('/login');
         }else{
             const info_player = await pool.query(`select * from players where id = $1`, [req.params.id])
-            const positions = await pool.query(`select * from position`)
+            const positions = await pool.query(`SELECT * FROM position where position.id not in (select staff.position_id from staff)`)
             console.log('player = ', info_player.rows)
-            console.log('position = ', positions.rows)
+            console.log('birthday = ', info_player.rows[0]['birthday'])
+            var date = new Intl.DateTimeFormat(['ban', 'id']).format(info_player.rows[0]['birthday'])
+            var date_list = date.split('/')
+            if(date_list[1].length == 1){
+                date_list[1] = '0'+date_list[1]
+            }
+            if(date_list[0].length == 1){
+                date_list[0] = '0'+date_list[0]
+            }
+            var date_new = date_list[2]+'-'+date_list[1]+'-'+date_list[0]
+            console.log('birthday new = ', date_new)
             res.render('edit_player',{
                 info_player:info_player.rows,
                 name: req.session.name,
                 email: req.session.email,
-                position: positions.rows
+                position: positions.rows,
+                birthday: date_new
             })
         }
     })
     
-    app.post('/player_edit/:id', async(req, res) => {
+    app.post('/player_edit/:id', urlencodedParser, upload.single('image'), async(req, res) => {
         if(typeof req.session.user == 'undefined'){
             res.redirect('/login');
         }else{
             const info_player = await pool.query(`select * from players where id = $1`, [req.params.id])
-            console.log('player = ', info_player)
-            res.render('product_add')
+            const staffes = await pool.query(`SELECT * FROM position where position.id not in (select staff.position_id from staff)`)
+
+            for (var i=0; i<staffes.rows.length; i++){
+                if(req.body.position == staffes.rows[i]['id']){
+                    if(staffes.rows[i]['name'].toLowerCase() == 'thủ môn'){
+                        const imagePath = path.join(__dirname, '../public/images/player/Goalkeepers/');
+                        const fileUpload = new Resize(imagePath);
+                        if (!req.file) {
+                            const update_players = await pool.query(`update players
+                            set full_name = $1, position_id = $2, birthday = $3, heights = $4, weights = $5, images = $6, number_position = $7
+                            where id = $8`, [req.body.full_name, req.body.position, req.body.birthday, req.body.heights, req.body.weights, '', req.body.number_position, req.params.id])
+                            console.log('edit thành công')
+                            res.redirect('/web')
+                        }else{
+                            const filename = await fileUpload.save(req.file.buffer);
+                            const update_players = await pool.query(`update players
+                            set full_name = $1, position_id = $2, birthday = $3, heights = $4, weights = $5, images = $6, number_position = $7
+                            where id = $8`, [req.body.full_name, req.body.position, req.body.birthday, req.body.heights, req.body.weights, 'images/player/Goalkeepers/'+filename, req.body.number_position, req.params.id])
+                            console.log('edit thành công')
+                            res.redirect('/web')
+                        }
+                        
+                    }else if(staffes.rows[i]['name'].toLowerCase() == 'tiền vệ'){
+                        const imagePath = path.join(__dirname, '../public/images/player/Midfielders/');
+                        const fileUpload = new Resize(imagePath);
+                        if (!req.file) {
+                            const update_players = await pool.query(`update players
+                            set full_name = $1, position_id = $2, birthday = $3, heights = $4, weights = $5, images = $6, number_position = $7
+                            where id = $8`, [req.body.full_name, req.body.position, req.body.birthday, req.body.heights, req.body.weights, '', req.body.number_position, req.params.id])
+                            console.log('edit thành công')
+                            res.redirect('/web')
+                        }else{
+                            const filename = await fileUpload.save(req.file.buffer);
+                            const update_players = await pool.query(`update players
+                            set full_name = $1, position_id = $2, birthday = $3, heights = $4, weights = $5, images = $6, number_position = $7
+                            where id = $8`, [req.body.full_name, req.body.position, req.body.birthday, req.body.heights, req.body.weights, 'images/player/Midfielders/'+filename, req.body.number_position, req.params.id])
+                            console.log('edit thành công')
+                            res.redirect('/web')
+                            
+                        }
+                        
+                    }else if(staffes.rows[i]['name'].toLowerCase() == 'tiền đạo'){
+                        const imagePath = path.join(__dirname, '../public/images/player/Forwards/');
+                        const fileUpload = new Resize(imagePath);
+                        if (!req.file) {
+                            const update_players = await pool.query(`update players
+                            set full_name = $1, position_id = $2, birthday = $3, heights = $4, weights = $5, images = $6, number_position = $7
+                            where id = $8`, [req.body.full_name, req.body.position, req.body.birthday, req.body.heights, req.body.weights, '', req.body.number_position, req.params.id])
+                            console.log('edit thành công')
+                            res.redirect('/web')
+                        }else{
+                            const filename = await fileUpload.save(req.file.buffer);
+                            const update_players = await pool.query(`update players
+                            set full_name = $1, position_id = $2, birthday = $3, heights = $4, weights = $5, images = $6, number_position = $7
+                            where id = $8`, [req.body.full_name, req.body.position, req.body.birthday, req.body.heights, req.body.weights, 'images/player/Forwards/'+filename, req.body.number_position, req.params.id])
+                            console.log('edit thành công')
+                            res.redirect('/web')
+                            
+                        }
+                        
+                    }else if(staffes.rows[i]['name'].toLowerCase() == 'hậu vệ'){
+                        const imagePath = path.join(__dirname, '../public/images/player/Defenders/');
+                        const fileUpload = new Resize(imagePath);
+                        if (!req.file) {
+                            const update_players = await pool.query(`update players
+                            set full_name = $1, position_id = $2, birthday = $3, heights = $4, weights = $5, images = $6, number_position = $7
+                            where id = $8`, [req.body.full_name, req.body.position, req.body.birthday, req.body.heights, req.body.weights, '', req.body.number_position, req.params.id])
+                            console.log('edit thành công')
+                            res.redirect('/web')
+                        }else{
+                            const filename = await fileUpload.save(req.file.buffer);
+                            const update_players = await pool.query(`update players
+                            set full_name = $1, position_id = $2, birthday = $3, heights = $4, weights = $5, images = $6, number_position = $7
+                            where id = $8`, [req.body.full_name, req.body.position, req.body.birthday, req.body.heights, req.body.weights, 'images/player/Defenders/'+filename, req.body.number_position, req.params.id])
+                            console.log('edit thành công')
+                            res.redirect('/web')
+                        }
+                    }
+                }
+            }
         }
     })
 
@@ -956,7 +1045,6 @@ async function route(app){
                 res.redirect('/web');
             })
         })
-        
     })
     
     app.get('/del_staff/:id', (req, res) => {
@@ -981,8 +1069,6 @@ async function route(app){
         if(typeof req.session.user == 'undefined'){
             res.redirect('/login');
         }else{
-            console.log('hello mấy cưng = ');
-            console.log('name = ', req.body);
             pool.connect(function(err, client, done){
                 if(err){
                     return console.error('error fetching client from pool ', err)

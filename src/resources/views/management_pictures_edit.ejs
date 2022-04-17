@@ -90,9 +90,22 @@
                             <a href="/customer_dashboard">
                             <i class="fas fa-newspaper"></i>Quản lý tin tức</a>
                         </li>
-                        <li>
-                            <a href="/customer_dashboard">
-                            <i class="fas fa-newspaper"></i>Quản lý media</a>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-chart-bar"></i>
+                                Quản lý media
+                            </a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="/management_videos">Cồng đồng</a>
+                                </li>
+                                <li>
+                                    <a href="/management_pictures">Hình ảnh</a>
+                                </li>
+                                <li>
+                                    <a href="/management_videos">Videos</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="/customer_dashboard">
@@ -139,9 +152,22 @@
                             <a href="/customer_dashboard">
                             <i class="fas fa-newspaper"></i>Quản lý tin tức</a>
                         </li>
-                        <li>
-                            <a href="/customer_dashboard">
-                            <i class="fas fa-newspaper"></i>Quản lý media</a>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-chart-bar"></i>
+                                Quản lý media
+                            </a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="/management_videos">Cồng đồng</a>
+                                </li>
+                                <li>
+                                    <a href="/management_pictures">Hình ảnh</a>
+                                </li>
+                                <li>
+                                    <a href="/management_videos">Videos</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="/customer_dashboard">
@@ -255,7 +281,7 @@
                                         <label for="text-input" class=" form-control-label">Năm</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="years" value="<%= picture[0]['years']%>" placeholder="Năm của bức ảnh" class="form-control">
+                                        <input type="text" id="text-input" name="years" value="<%= picture[0]['years']%>" placeholder="Năm của bức ảnh" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="row form-group">
